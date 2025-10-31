@@ -20,16 +20,20 @@ if sys.platform == 'win32':
 # ===================== CẤU HÌNH =====================
 BASE_OUTPUT_DIR = r"C:\Abivin\data_docs03"
 
-ODOO_BASE_URL = "https://abivindocs1.odoo.com"
-ODOO_DB_NAME = "abivindocs1"
+ODOO_BASE_URL = "https://test018.odoo.com"
+ODOO_DB_NAME = "test018"
 ODOO_USER = "trinhcongduc0112@gmail.com"
-ODOO_API_KEY = "06f44edc309a7c6d558321f8809d2c72509e41df"
+ODOO_API_KEY = "3f623d85508792f81af911610db742d67a5d1845"
 
-SPACE_NAME = "[NHÁP] Dữ liệu Docs Import"
+SPACE_NAME = "Tài liệu Abivin"
 MODEL_ARTICLE = "knowledge.article"
 MODEL_ATTACHMENT = "ir.attachment"
 LOCAL_ASSET_REF = "../assets_"
 # ====================================================
+
+# Tùy chọn đánh ID tuần tự (chỉ dùng để sort, không hiển thị trong tiêu đề)
+APPEND_ID_TO_TITLE = False  # Tắt hiển thị ID trong tiêu đề trên Odoo
+ID_TITLE_FORMAT = " [#%04d]"  # Format không dùng, chỉ để tham khảo
 
 
 # ---------------- XML-RPC CORE ----------------------
@@ -148,26 +152,49 @@ def replace_local_assets(html: str, asset_map: Dict[str, str]) -> str:
     return result
 
 
-def iter_json_docs():
-    """Duyệt tất cả các file JSON và assets folder tương ứng"""
+def load_sorted_docs():
+    """Load tất cả JSON, gom kèm assets_dir, sắp xếp theo order_index và gán id_seq nếu thiếu."""
     all_content_dirs = [d for d in glob.glob(os.path.join(BASE_OUTPUT_DIR, "*", "content_*")) if os.path.isdir(d)]
     if not all_content_dirs:
         raise SystemExit(f"❌ LỖI: Không tìm thấy thư mục 'content_*' trong '{BASE_OUTPUT_DIR}'.")
-    
+
     print(f"📂 Tìm thấy {len(all_content_dirs)} thư mục content:")
     for content_dir in all_content_dirs:
         print(f"  - {os.path.basename(content_dir)}")
-    
+
+    items = []  # (slug, doc, assets_dir)
     for content_dir in all_content_dirs:
         assets_dir = os.path.join(
             os.path.dirname(content_dir),
             os.path.basename(content_dir).replace("content_", "assets_")
         )
-        for jp in sorted(glob.glob(os.path.join(content_dir, "*.json"))):
-            with open(jp, "r", encoding="utf-8") as f:
-                d = json.load(f)
-            slug = d.get("new_slug") or d.get("old_slug") or os.path.splitext(os.path.basename(jp))[0]
-            yield slug, d, (assets_dir if os.path.isdir(assets_dir) else None)
+        for jp in glob.glob(os.path.join(content_dir, "*.json")):
+            try:
+                with open(jp, "r", encoding="utf-8") as f:
+                    d = json.load(f)
+                slug = d.get("new_slug") or d.get("old_slug") or os.path.splitext(os.path.basename(jp))[0]
+                items.append((slug, d, assets_dir if os.path.isdir(assets_dir) else None))
+            except Exception as e:
+                print(f"  ⚠️  Bỏ qua file lỗi '{jp}': {e}")
+
+    # Sắp xếp theo order_index (mặc định lớn nếu thiếu), sau đó theo title để ổn định
+    def sort_key(tup):
+        _slug, _doc, _ = tup
+        return (
+            _doc.get("order_index", 999999),
+            (_doc.get("title") or _slug).lower()
+        )
+
+    items.sort(key=sort_key)
+
+    # Gán id_seq chạy suốt danh sách nếu file chưa có
+    next_seq = 1
+    for i, (slug, doc, assets_dir) in enumerate(items, start=1):
+        if not doc.get("_id_seq"):
+            doc["_id_seq"] = next_seq
+            next_seq += 1
+
+    return items
 
 
 # ------------------- IMPORTER CHÍNH -------------------
@@ -183,10 +210,17 @@ def import_all():
     print("🚀 BẮT ĐẦU QUÁ TRÌNH IMPORT...")
     print("="*60 + "\n")
 
-    for slug, doc, assets_dir in iter_json_docs():
+    # Load & sort, đồng thời gán _id_seq
+    sorted_items = load_sorted_docs()
+
+    article_ids: Dict[str, int] = {}
+
+    for slug, doc, assets_dir in sorted_items:
         total_files += 1
         try:
-            title = doc.get("title") or slug
+            base_title = doc.get("title") or slug
+            id_seq = doc.get("_id_seq")
+            title = f"{base_title}{(ID_TITLE_FORMAT % id_seq) if (APPEND_ID_TO_TITLE and id_seq) else ''}"
             print(f"\n[{total_files}] Đang xử lý: {title[:60]}")
             
             # Xử lý ảnh
@@ -221,30 +255,62 @@ def import_all():
 
             # Tạo hoặc cập nhật article
             vals = {
-                "name": doc.get("title") or slug,
+                "name": title,
                 "body": body,
                 "parent_id": space_id
             }
+            # Thêm sequence nếu có _id_seq để Odoo sort đúng thứ tự
+            if id_seq:
+                vals["sequence"] = id_seq
 
             # Kiểm tra article đã tồn tại
+            # 1) Tìm theo tên chính xác
             existing_article = odoo_search(
                 models, uid, MODEL_ARTICLE,
                 [("name", "=", vals["name"]), ("parent_id", "=", space_id)],
                 ["id"], limit=1
             )
+            # 2) Nếu không thấy (trường hợp phiên bản cũ có tên kèm [#ID]) thì tìm gần đúng theo tiền tố
+            if not existing_article:
+                existing_article = odoo_search(
+                    models, uid, MODEL_ARTICLE,
+                    [("name", "ilike", f"{base_title}%"), ("parent_id", "=", space_id)],
+                    ["id"], limit=1
+                )
 
             if existing_article:
                 rid = existing_article[0]["id"]
                 odoo_write(models, uid, MODEL_ARTICLE, [rid], vals)
+                article_ids[slug] = rid
                 print(f"  ✓ Cập nhật bài viết (ID: {rid})")
             else:
                 aid = odoo_create(models, uid, MODEL_ARTICLE, vals)
+                article_ids[slug] = aid
                 print(f"  ✓ Tạo mới bài viết (ID: {aid})")
             
             success_count += 1
 
         except Exception as e:
             print(f"\n❌ LỖI khi xử lý '{slug}': {e}\n")
+
+    # Lượt 2: Set parent_id theo parent_slug
+    print("\n🔗 Đang thiết lập quan hệ cha-con...")
+    fixed = 0
+    for slug, doc, _assets_dir in sorted_items:
+        try:
+            parent_slug = doc.get("parent_slug")
+            if not parent_slug:
+                continue
+            child_id = article_ids.get(slug)
+            parent_id = article_ids.get(parent_slug)
+            if child_id and parent_id:
+                odoo_write(models, uid, MODEL_ARTICLE, [child_id], {"parent_id": parent_id})
+                fixed += 1
+        except Exception as e:
+            print(f"  ⚠️  Không thể set parent cho '{slug}': {e}")
+
+    if fixed:
+        print(f"  ✓ Đã set parent cho {fixed} bài viết")
 
     print("\n" + "="*60)
     print(f"✅✅✅ IMPORT HOÀN TẤT! ✅✅✅")

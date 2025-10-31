@@ -358,7 +358,7 @@ def export_category(category_slug: str, section_key: str, root_seg: str, out_bas
             if parent_url and parent_url in parent_slug_map:
                 parent_slug = parent_slug_map[parent_url]
             
-            # Build doc structure
+            # Build doc structure (gán thứ tự crawl làm order_index và _id_seq)
             doc = {
                 "origin_url": url.rstrip("/"),
                 "origin_host": PROJECT_HOST,
@@ -367,6 +367,7 @@ def export_category(category_slug: str, section_key: str, root_seg: str, out_bas
                 "parents_segments": parents,
                 "parent_slug": parent_slug,  # NEW: lưu parent
                 "order_index": idx,
+                "_id_seq": idx,
                 "old_slug": full_slug,
                 "new_slug": full_slug,
                 "title": title,
