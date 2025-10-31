@@ -1,0 +1,21 @@
+{
+  "origin_url": "https://docs.abivin.com/reference/post_organizations-route-optimize",
+  "origin_host": "docs.abivin.com",
+  "collection": "abivin-docs",
+  "section": "developer_guide",
+  "parents_segments": [
+    "reference"
+  ],
+  "parent_slug": null,
+  "order_index": 70,
+  "old_slug": "reference__post_organizations-route-optimize",
+  "new_slug": "reference__post_organizations-route-optimize",
+  "title": "/organizations/route/optimize",
+  "html_content": "<article class=\"rm-Article\" id=\"content\"></article>",
+  "tags": [],
+  "lang": "en",
+  "status": "ready",
+  "updated_at": "2025-10-29T09:53:36Z",
+  "scraped": true,
+  "_readme_category": "reference"
+}

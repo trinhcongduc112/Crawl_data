@@ -1,0 +1,21 @@
+{
+  "origin_url": "https://docs.abivin.com/reference/post_products-categories-read",
+  "origin_host": "docs.abivin.com",
+  "collection": "abivin-docs",
+  "section": "developer_guide",
+  "parents_segments": [
+    "reference"
+  ],
+  "parent_slug": null,
+  "order_index": 77,
+  "old_slug": "reference__post_products-categories-read",
+  "new_slug": "reference__post_products-categories-read",
+  "title": "/products/categories/read",
+  "html_content": "<article class=\"rm-Article\" id=\"content\"></article>",
+  "tags": [],
+  "lang": "en",
+  "status": "ready",
+  "updated_at": "2025-10-29T09:53:51Z",
+  "scraped": true,
+  "_readme_category": "reference"
+}

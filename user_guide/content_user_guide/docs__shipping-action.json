@@ -1,0 +1,21 @@
+{
+  "origin_url": "https://docs.abivin.com/docs/shipping-action",
+  "origin_host": "docs.abivin.com",
+  "collection": "abivin-docs",
+  "section": "user_guide",
+  "parents_segments": [
+    "docs"
+  ],
+  "parent_slug": null,
+  "order_index": 112,
+  "old_slug": "docs__shipping-action",
+  "new_slug": "docs__shipping-action",
+  "title": "Shipping Action",
+  "html_content": "<main class=\"SuperHubDoc3Z-1XSVTg-Q1 rm-Guides\" id=\"content\"><div class=\"SuperHubDoc-container2RY1FPE4Ewze rm-Container rm-Container_flex\"><article class=\"SuperHubDoc-article3ArTrEavUTKg rm-Article rm-Guides-SuperHub\"><div class=\"grid-container-fluid\" id=\"content-container\"><section class=\"content-body grid-75\"><div class=\"rm-Markdown markdown-body rm-Markdown markdown-body ng-non-bindable\" data-testid=\"RDMD\" style=\"margin-left:31px\"></div><div class=\"UpdatedAt\"><p class=\"DateLine\"><i class=\"icon icon-watch\"></i>Updated<!-- --> <!-- -->about 1 month ago<!-- --> </p></div><hr class=\"NextStepsDivider\"/></section><section class=\"content-toc grid-25\"></section></div><div class=\"ModalWrapper\" id=\"tutorialmodal-root\"></div></article></div></main>",
+  "tags": [],
+  "lang": "en",
+  "status": "ready",
+  "updated_at": "2025-10-27T03:47:33Z",
+  "scraped": true,
+  "_readme_category": "docs"
+}

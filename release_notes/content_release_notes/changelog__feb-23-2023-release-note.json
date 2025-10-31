@@ -1,0 +1,21 @@
+{
+  "origin_url": "https://docs.abivin.com/changelog/feb-23-2023-release-note",
+  "origin_host": "docs.abivin.com",
+  "collection": "abivin-docs",
+  "section": "release_notes",
+  "parents_segments": [
+    "changelog"
+  ],
+  "parent_slug": null,
+  "order_index": 4,
+  "old_slug": "changelog__feb-23-2023-release-note",
+  "new_slug": "changelog__feb-23-2023-release-note",
+  "title": "Feb 23, 2023 - Release Note",
+  "html_content": "<main class=\"rm-Changelog\" id=\"content\"><div class=\"rm-Container rm-ContainerNarrow\"><article class=\"ChangelogPage2ByKk2Tbv2Rx ChangelogPage_listtQrcObF5m4bD rm-Changelog-post\" id=\"feb-23,-2023---release-note\"><div align=\"center\" class=\"Flex Flex_row ChangelogPage_back3w-yJ7dzamGo\" justify=\"end\" style=\"--flex-gap:var(--md)\"><a class=\"Button Button_sm Button_text ChangelogPost_backVFYixWm1Jvy7\" href=\"https://docs.abivin.com/changelog\"><span class=\"icon-arrow-left2 ChangelogPost_back-icon2yl4BUUuRf8A\"></span>Back to All</a></div><div class=\"ChangelogPost23xgeRV24eRI ChangelogPage_list-post\"><section class=\"ChangelogPost_textdx2lvBFg0xLI\"><div class=\"rm-Markdown markdown-body\" data-testid=\"RDMD\"><p><strong>New features:</strong> Create sub-addresses for customers</p>\n<h2 class=\"heading heading-2 header-scroll\"><div class=\"heading-anchor anchor waypoint\" id=\"new-features\"></div><div class=\"heading-text\">New features</div><a aria-label=\"Skip link to New features\" class=\"heading-anchor-icon fa fa-regular fa-anchor\" href=\"#new-features\"></a></h2>\n<p>Update new feature about sub-address when creating customer.<br/>\n<!-- -->For a customer can create many different sub-addresses, but in a day the customer can only receive delivery at one address.<br/>\n<em>Create sub-addresses for customers, read more details here</em>*] ( (<a href=\"https://docs.abivin.com/docs/vrp-in-house-fleet-manage-customers#customer-sub-address\" target=\"_self\">https://docs.abivin.com/docs/vrp-in-house-fleet-manage-customers#customer-sub-address</a>)</p></div></section></div></article></div></main>",
+  "tags": [],
+  "lang": "en",
+  "status": "ready",
+  "updated_at": "2025-10-27T03:45:38Z",
+  "scraped": true,
+  "_readme_category": "changelog"
+}

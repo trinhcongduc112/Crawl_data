@@ -1,0 +1,21 @@
+{
+  "origin_url": "https://docs.abivin.com/reference/list",
+  "origin_host": "docs.abivin.com",
+  "collection": "abivin-docs",
+  "section": "developer_guide",
+  "parents_segments": [
+    "reference"
+  ],
+  "parent_slug": null,
+  "order_index": 4,
+  "old_slug": "reference__list",
+  "new_slug": "reference__list",
+  "title": "List",
+  "html_content": "<article class=\"rm-Article\" id=\"content\"><div class=\"rm-Markdown markdown-body content-body\" data-testid=\"RDMD\"><h1 class=\"heading heading-1 header-scroll\"><div class=\"heading-text\">Request Body</div><a aria-label=\"Skip link to Request Body\" class=\"heading-anchor-icon fa fa-regular fa-anchor\" href=\"#request-body\"></a></h1>\n<p>JSON object</p>\n<h1 class=\"heading heading-1 header-scroll\"><div class=\"heading-text\">Response Body</div><a aria-label=\"Skip link to Response Body\" class=\"heading-anchor-icon fa fa-regular fa-anchor\" href=\"#response-body\"></a></h1>\n<p>JSON object</p></div></article>",
+  "tags": [],
+  "lang": "en",
+  "status": "ready",
+  "updated_at": "2025-10-29T09:51:10Z",
+  "scraped": true,
+  "_readme_category": "reference"
+}

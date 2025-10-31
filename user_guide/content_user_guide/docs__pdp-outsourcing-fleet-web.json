@@ -1,0 +1,21 @@
+{
+  "origin_url": "https://docs.abivin.com/docs/pdp-outsourcing-fleet-web",
+  "origin_host": "docs.abivin.com",
+  "collection": "abivin-docs",
+  "section": "user_guide",
+  "parents_segments": [
+    "docs"
+  ],
+  "parent_slug": null,
+  "order_index": 105,
+  "old_slug": "docs__pdp-outsourcing-fleet-web",
+  "new_slug": "docs__pdp-outsourcing-fleet-web",
+  "title": "PDP - Shipper Plan for Carrier Model",
+  "html_content": "<main class=\"SuperHubDoc3Z-1XSVTg-Q1 rm-Guides\" id=\"content\"><div class=\"SuperHubDoc-container2RY1FPE4Ewze rm-Container rm-Container_flex\"><article class=\"SuperHubDoc-article3ArTrEavUTKg rm-Article rm-Guides-SuperHub\"><div class=\"grid-container-fluid\" id=\"content-container\"><section class=\"content-body grid-75\"><div class=\"rm-Markdown markdown-body rm-Markdown markdown-body ng-non-bindable\" data-testid=\"RDMD\" style=\"margin-left:31px\"><ul>\n<li>In this model, your organization manages multiple Depots. However, the everyday delivery tasks between the Depots are not handled by your inhouse delivery fleet. Instead, the delivery tasks will be fulfilled by Transport service providers  (<strong>Transporters</strong> for short) which your organization signs contracts with. Each Transporter provides different Transport service prices. The goal of this model is to find the Transporters whose Transport service prices are the lowest</li>\n</ul></div><div class=\"UpdatedAt\"><p class=\"DateLine\"><i class=\"icon icon-watch\"></i>Updated<!-- --> <!-- -->about 1 month ago<!-- --> </p></div><hr class=\"NextStepsDivider\"/></section><section class=\"content-toc grid-25\"></section></div><div class=\"ModalWrapper\" id=\"tutorialmodal-root\"></div></article></div></main>",
+  "tags": [],
+  "lang": "en",
+  "status": "ready",
+  "updated_at": "2025-10-27T03:47:27Z",
+  "scraped": true,
+  "_readme_category": "docs"
+}

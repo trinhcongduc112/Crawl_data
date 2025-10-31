@@ -1,0 +1,21 @@
+{
+  "origin_url": "https://docs.abivin.com/reference/getting-started-with-your-api",
+  "origin_host": "docs.abivin.com",
+  "collection": "abivin-docs",
+  "section": "developer_guide",
+  "parents_segments": [
+    "reference"
+  ],
+  "parent_slug": null,
+  "order_index": 3,
+  "old_slug": "reference__getting-started-with-your-api",
+  "new_slug": "reference__getting-started-with-your-api",
+  "title": "Getting Started With Your API",
+  "html_content": "<article class=\"rm-Article\" id=\"content\"><div class=\"rm-Markdown markdown-body content-body\" data-testid=\"RDMD\"><p>This is where you show your users how to set it up. You can use code samples, like this:</p>\n<div class=\"CodeTabs CodeTabs_initial theme-light\"><div class=\"CodeTabs-toolbar\"><button type=\"button\" value=\"javascript\">JavaScript</button></div><div class=\"CodeTabs-inner\"><pre style=\"background: #f6f8fa; border: 1px solid #eaecef; border-radius: 6px; padding: 12px; overflow: auto;\"><button aria-label=\"Copy Code\" class=\"rdmd-code-copy fa\"></button><code class=\"rdmd-code lang- theme-light\" data-lang=\"\">$http.post('/someUrl', data).success(successCallback);\n\nalert('test');</code></pre></div></div>\n<p>Try dragging a block from the right to see how easy it is to add more content!</p></div></article>",
+  "tags": [],
+  "lang": "en",
+  "status": "ready",
+  "updated_at": "2025-10-29T09:51:08Z",
+  "scraped": true,
+  "_readme_category": "reference"
+}

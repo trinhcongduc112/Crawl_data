@@ -1,0 +1,21 @@
+{
+  "origin_url": "https://docs.abivin.com/docs/vrp-in-house-fleet-web",
+  "origin_host": "docs.abivin.com",
+  "collection": "abivin-docs",
+  "section": "user_guide",
+  "parents_segments": [
+    "docs"
+  ],
+  "parent_slug": null,
+  "order_index": 169,
+  "old_slug": "docs__vrp-in-house-fleet-web",
+  "new_slug": "docs__vrp-in-house-fleet-web",
+  "title": "[Inner City] VRP/DC Model",
+  "html_content": "<main class=\"SuperHubDoc3Z-1XSVTg-Q1 rm-Guides\" id=\"content\"><div class=\"SuperHubDoc-container2RY1FPE4Ewze rm-Container rm-Container_flex\"><article class=\"SuperHubDoc-article3ArTrEavUTKg rm-Article rm-Guides-SuperHub\"><div class=\"grid-container-fluid\" id=\"content-container\"><section class=\"content-body grid-75\"><div class=\"rm-Markdown markdown-body rm-Markdown markdown-body ng-non-bindable\" data-testid=\"RDMD\" style=\"margin-left:31px\"><ul>\n<li>VRP/DC Model is the routing model in which your organization owns a number of warehouses (also known as Distribution center - DC). Each warehouse, which has its own customer base and vehicle fleet, is a delivery route's starting point and also where it is completed. In addition, a number of constraints like multimodal deliveries, weight volume capacities, time windows... can be considered by flexible algorithms to create the most optimal transportation plan.</li>\n<li>Upon receiving the Sales Orders placed by the Customers, the dispatcher will build a Route Plan for their vehicle fleet. Typically, a Route Plan will cover the following points:</li>\n<li>1 -  List of the vehicles that will be utilized</li>\n<li>2 - How the Customers' orders should be allocated on the Delivery Route of each vehicle</li>\n<li>3 - Timeline for each vehicle to perform the delivery tasks</li>\n<li>In order to optimize a route plan using VRP/DC Model, dispatchers must bear in mind the tutorials on how to manage each of Abivin vRoute System Resources (Organizations, Users &amp; User Groups, Partners, Products &amp; Product Categories, Orders, Vehicles, Tasks &amp; Actions), which are demonstrated thoroughly in the next articles.</li>\n<li>After the route plan has been generated, the deliverers can start loading products from the warehouse shelves and start their delivery tasks. After the deliverers have completed the delivery, they will travel back to their warehouses, hand over collected cash, and end their working day.</li>\n</ul>\n<blockquote class=\"callout callout_okay\" theme=\"👍\"><span class=\"callout-icon\">👍</span><h3 class=\"heading heading-3 header-scroll\"><div class=\"heading-anchor anchor waypoint\" id=\"compatible-with-pdp-model\"></div><div class=\"heading-text\">Compatible with PDP model</div><a aria-label=\"Skip link to Compatible with PDP model\" class=\"heading-anchor-icon fa fa-regular fa-anchor\" href=\"#compatible-with-pdp-model\"></a></h3><ul>\n<li>You can run this model simultaneously with the <a href=\"https://docs.abivin.com/docs/pdp-in-house-fleet-web\" target=\"_self\">PDP model</a> on the same account, provided that you have separate Organizations of Branch type for each model</li>\n<li>Apart from the PDP model, none of the remaining models can run simultaneously with this model on the same account</li>\n</ul></blockquote></div><div class=\"UpdatedAt\"><p class=\"DateLine\"><i class=\"icon icon-watch\"></i>Updated<!-- --> <!-- -->about 1 month ago<!-- --> </p></div><hr class=\"NextStepsDivider\"/></section><section class=\"content-toc grid-25\"></section></div><div class=\"ModalWrapper\" id=\"tutorialmodal-root\"></div></article></div></main>",
+  "tags": [],
+  "lang": "en",
+  "status": "ready",
+  "updated_at": "2025-10-27T03:48:21Z",
+  "scraped": true,
+  "_readme_category": "docs"
+}

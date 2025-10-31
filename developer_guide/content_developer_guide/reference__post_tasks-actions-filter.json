@@ -1,0 +1,21 @@
+{
+  "origin_url": "https://docs.abivin.com/reference/post_tasks-actions-filter",
+  "origin_host": "docs.abivin.com",
+  "collection": "abivin-docs",
+  "section": "developer_guide",
+  "parents_segments": [
+    "reference"
+  ],
+  "parent_slug": null,
+  "order_index": 114,
+  "old_slug": "reference__post_tasks-actions-filter",
+  "new_slug": "reference__post_tasks-actions-filter",
+  "title": "/tasks/actions/filter",
+  "html_content": "<article class=\"rm-Article\" id=\"content\"></article>",
+  "tags": [],
+  "lang": "en",
+  "status": "ready",
+  "updated_at": "2025-10-29T09:55:11Z",
+  "scraped": true,
+  "_readme_category": "reference"
+}

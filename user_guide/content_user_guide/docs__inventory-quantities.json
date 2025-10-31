@@ -1,0 +1,21 @@
+{
+  "origin_url": "https://docs.abivin.com/docs/inventory-quantities",
+  "origin_host": "docs.abivin.com",
+  "collection": "abivin-docs",
+  "section": "user_guide",
+  "parents_segments": [
+    "docs"
+  ],
+  "parent_slug": null,
+  "order_index": 63,
+  "old_slug": "docs__inventory-quantities",
+  "new_slug": "docs__inventory-quantities",
+  "title": "Inventory Quantities",
+  "html_content": "<main class=\"SuperHubDoc3Z-1XSVTg-Q1 rm-Guides\" id=\"content\"><div class=\"SuperHubDoc-container2RY1FPE4Ewze rm-Container rm-Container_flex\"><article class=\"SuperHubDoc-article3ArTrEavUTKg rm-Article rm-Guides-SuperHub\"><div class=\"grid-container-fluid\" id=\"content-container\"><section class=\"content-body grid-75\"><div class=\"rm-Markdown markdown-body rm-Markdown markdown-body ng-non-bindable\" data-testid=\"RDMD\" style=\"margin-left:31px\"><p>In inventory management, it is easy to overlook the precision of SKU quantity in the warehouse. Answering the question \"How many SKUs do we have at the moment?\" is not that obvious. How do you define \"to have\"? Are the in-transit products just leaving the warehouse counted in the quantity we are having? Are the products purchased two days ago, coming into the warehouse counted in the quantity? What is the correct quantity we can sell today or sell for the next 2 days? This page aims to make this concept clear.</p>\n<p>A warehouse manager worries the most about the right <strong>On-hand Quantity</strong> inside the warehouse. One must make sure the goods are taken out with a <a href=\"https://docs.abivin.com/docs/orders#section-sales-order\" target=\"_self\">Sales Orders</a> and brought in with a <a href=\"https://docs.abivin.com/docs/orders#section-purchase-order\" target=\"_self\">Purchase Order</a>. Without these orders, a warehouse manager must fight to his death to protect the goods inside the warehouse.</p>\n<p>We define the following quantities to be tracked per SKU or Product Code in Abivin vRoute v3.0:</p>\n<ul>\n<li>On-hand quantity: the total of items we have physically available on the warehouse shelf</li>\n<li>Picked quantity: the total number of items that have already been picked in sales orders and are awaiting shipment in the shipping area.</li>\n<li>On-SOrder quantity: the total number of items ordered by your customers (across all Sales orders that are not yet on Status \"Shipped\"). This number is what you need to be fulfilling to complete sales!</li>\n<li>On-POrder quantity: This number is how many you’ve ordered from your supplier/vendor but haven’t received. This also includes quantities of items being made in a work order.</li>\n<li>Owned quantity: This is the number of items you possess. It is equal to the total of On-hand quantity and Picked quantity.</li>\n<li>Available quantity: This is the number of items you have left if you fulfill all open Sales Orders and is therefore equal to Owned quantity – On-SOrder Quantity. (i.e. what’s left after you’ve shipped all your current orders).</li>\n<li>Anticipated Quantity: This determines whether or not you need to reorder more stock. It equals Owned quantity – On-SOrder quantity + On-POrder quantity. This way, it takes into account all physical items, subtracts the number you need to fulfill to your customers, and adds the number you already have on open Purchase Orders.</li>\n</ul></div><div class=\"UpdatedAt\"><p class=\"DateLine\"><i class=\"icon icon-watch\"></i>Updated<!-- --> <!-- -->about 1 month ago<!-- --> </p></div><hr class=\"NextStepsDivider\"/></section><section class=\"content-toc grid-25\"></section></div><div class=\"ModalWrapper\" id=\"tutorialmodal-root\"></div></article></div></main>",
+  "tags": [],
+  "lang": "en",
+  "status": "ready",
+  "updated_at": "2025-10-27T03:46:53Z",
+  "scraped": true,
+  "_readme_category": "docs"
+}

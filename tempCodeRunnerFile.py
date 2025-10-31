@@ -1,0 +1,1 @@
+API_BASE_DEFAULT = "https://dash.readme.com/api/v1"

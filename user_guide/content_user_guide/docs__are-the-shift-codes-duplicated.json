@@ -1,0 +1,21 @@
+{
+  "origin_url": "https://docs.abivin.com/docs/are-the-shift-codes-duplicated",
+  "origin_host": "docs.abivin.com",
+  "collection": "abivin-docs",
+  "section": "user_guide",
+  "parents_segments": [
+    "docs"
+  ],
+  "parent_slug": null,
+  "order_index": 5,
+  "old_slug": "docs__are-the-shift-codes-duplicated",
+  "new_slug": "docs__are-the-shift-codes-duplicated",
+  "title": "Are the shift codes duplicated?",
+  "html_content": "<main class=\"SuperHubDoc3Z-1XSVTg-Q1 rm-Guides\" id=\"content\"><div class=\"SuperHubDoc-container2RY1FPE4Ewze rm-Container rm-Container_flex\"><article class=\"SuperHubDoc-article3ArTrEavUTKg rm-Article rm-Guides-SuperHub\"><div class=\"grid-container-fluid\" id=\"content-container\"><section class=\"content-body grid-75\"><div class=\"rm-Markdown markdown-body rm-Markdown markdown-body ng-non-bindable\" data-testid=\"RDMD\" style=\"margin-left:31px\"><h2 class=\"heading heading-2 header-scroll\"><div class=\"heading-anchor anchor waypoint\" id=\"are-the-shift-codes-duplicated\"></div><div class=\"heading-text\">Are the shift codes duplicated?</div><a aria-label=\"Skip link to Are the shift codes duplicated?\" class=\"heading-anchor-icon fa fa-regular fa-anchor\" href=\"#are-the-shift-codes-duplicated\"></a></h2>\n<p><strong>Case</strong>: Customers may see the shift codes/ tripcodes from different vehicles belonging to different branches have the exact digits.</p>\n<figure><span aria-label=\"1468\" class=\"img lightbox closed\" role=\"button\" tabindex=\"0\"><span class=\"lightbox-inner\"><img alt=\"1468\" class=\"img img-align-center\" height=\"auto\" loading=\"lazy\" src=\"../assets_user_guide/b19e360-1222.png\" title=\"1222.png\" width=\"auto\" style=\"max-width:100%; height:auto; max-width:100%; height:auto; max-width:100%; height:auto; max-width:100%; height:auto;\"/><figcaption><p>The XEKHO009 vehicle belongs to the \"Chi Nhánh 3\" Branch has the shift code: SHIFT-210203-0003 on the 04 February 2021 route plan.</p></figcaption></span></span></figure>\n<figure><span aria-label=\"1469\" class=\"img lightbox closed\" role=\"button\" tabindex=\"0\"><span class=\"lightbox-inner\"><img alt=\"1469\" class=\"img img-align-center\" height=\"auto\" loading=\"lazy\" src=\"../assets_user_guide/81db588-223.png\" title=\"223.png\" width=\"auto\" style=\"max-width:100%; height:auto; max-width:100%; height:auto; max-width:100%; height:auto; max-width:100%; height:auto;\"/><figcaption><p>The XEKHO001 vehicle belongs to the \"Chi Nhánh 1\" Branch has the shift code: SHIFT-210203-0003 on the 04 February 2021 route plan.</p></figcaption></span></span></figure>\n<p><strong>Reason</strong>: The format of the Shift/Trip code on the platform is: <strong>SHIFT-YYMMDD-{counter}</strong></p>\n<span aria-label=\"Expand image\" class=\"img lightbox closed\" role=\"button\" tabindex=\"0\"><span class=\"lightbox-inner\"><img alt=\"156\" class=\"img\" height=\"auto\" loading=\"lazy\" src=\"../assets_user_guide/210aa94-222.png\" title=\"222.png\" width=\"auto\" style=\"max-width:100%; height:auto; max-width:100%; height:auto; max-width:100%; height:auto; max-width:100%; height:auto;\"/></span></span>\n<p>For example:  <em><strong>SHIFT-220104-0001</strong></em> means the shift is the <em><strong>first</strong></em> shift of the vehicle, planned on <em><strong>04 January 2022</strong></em>.<br/>\n<!-- -->The system by default allows Shift codes of vehicles from different branches can have the same digits.</p></div><div class=\"UpdatedAt\"><p class=\"DateLine\"><i class=\"icon icon-watch\"></i>Updated<!-- --> <!-- -->about 1 month ago<!-- --> </p></div><hr class=\"NextStepsDivider\"/></section><section class=\"content-toc grid-25\"></section></div><div class=\"ModalWrapper\" id=\"tutorialmodal-root\"></div></article></div></main>",
+  "tags": [],
+  "lang": "en",
+  "status": "ready",
+  "updated_at": "2025-10-27T03:46:08Z",
+  "scraped": true,
+  "_readme_category": "docs"
+}

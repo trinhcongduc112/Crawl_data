@@ -1,0 +1,21 @@
+{
+  "origin_url": "https://docs.abivin.com/reference/post_roles-read",
+  "origin_host": "docs.abivin.com",
+  "collection": "abivin-docs",
+  "section": "developer_guide",
+  "parents_segments": [
+    "reference"
+  ],
+  "parent_slug": null,
+  "order_index": 99,
+  "old_slug": "reference__post_roles-read",
+  "new_slug": "reference__post_roles-read",
+  "title": "/roles/read",
+  "html_content": "<article class=\"rm-Article\" id=\"content\"></article>",
+  "tags": [],
+  "lang": "en",
+  "status": "ready",
+  "updated_at": "2025-10-29T09:54:38Z",
+  "scraped": true,
+  "_readme_category": "reference"
+}

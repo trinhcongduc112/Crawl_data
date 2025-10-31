@@ -1,0 +1,21 @@
+{
+  "origin_url": "https://docs.abivin.com/reference/post_roles-update",
+  "origin_host": "docs.abivin.com",
+  "collection": "abivin-docs",
+  "section": "developer_guide",
+  "parents_segments": [
+    "reference"
+  ],
+  "parent_slug": null,
+  "order_index": 100,
+  "old_slug": "reference__post_roles-update",
+  "new_slug": "reference__post_roles-update",
+  "title": "/roles/update",
+  "html_content": "<article class=\"rm-Article\" id=\"content\"></article>",
+  "tags": [],
+  "lang": "en",
+  "status": "ready",
+  "updated_at": "2025-10-29T09:54:40Z",
+  "scraped": true,
+  "_readme_category": "reference"
+}

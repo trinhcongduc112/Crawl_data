@@ -1,0 +1,21 @@
+{
+  "origin_url": "https://docs.abivin.com/changelog/jan-18-2023-release-note",
+  "origin_host": "docs.abivin.com",
+  "collection": "abivin-docs",
+  "section": "release_notes",
+  "parents_segments": [
+    "changelog"
+  ],
+  "parent_slug": null,
+  "order_index": 8,
+  "old_slug": "changelog__jan-18-2023-release-note",
+  "new_slug": "changelog__jan-18-2023-release-note",
+  "title": "Jan 18, 2023 - Release Note",
+  "html_content": "<main class=\"rm-Changelog\" id=\"content\"><div class=\"rm-Container rm-ContainerNarrow\"><article class=\"ChangelogPage2ByKk2Tbv2Rx ChangelogPage_listtQrcObF5m4bD rm-Changelog-post\" id=\"jan-18,-2023---release-note\"><div align=\"center\" class=\"Flex Flex_row ChangelogPage_back3w-yJ7dzamGo\" justify=\"end\" style=\"--flex-gap:var(--md)\"><a class=\"Button Button_sm Button_text ChangelogPost_backVFYixWm1Jvy7\" href=\"https://docs.abivin.com/changelog\"><span class=\"icon-arrow-left2 ChangelogPost_back-icon2yl4BUUuRf8A\"></span>Back to All</a></div><div class=\"ChangelogPost23xgeRV24eRI ChangelogPage_list-post\"><section class=\"ChangelogPost_textdx2lvBFg0xLI\"><div class=\"rm-Markdown markdown-body\" data-testid=\"RDMD\"><ul>\n<li>The exact route plan can be accessed via the URL.</li>\n<li>Show Username instead of Fullname.</li>\n<li>Add data column</li>\n</ul>\n<h2 class=\"heading heading-2 header-scroll\"><div class=\"heading-anchor anchor waypoint\" id=\"improved-features\"></div><div class=\"heading-text\">Improved features</div><a aria-label=\"Skip link to Improved features\" class=\"heading-anchor-icon fa fa-regular fa-anchor\" href=\"#improved-features\"></a></h2>\n<p>** <strong>The exact route plan can be accessed via the URL</strong></p>\n<ul>\n<li>On the mapview screen will display the URL link. Each day and branch shows a different URL link so users can access the exact date and branch they want in the roadmap.</li>\n</ul>\n<span aria-label=\"Expand image\" class=\"img lightbox closed\" role=\"button\" tabindex=\"0\"><span class=\"lightbox-inner\"><img alt=\"1459\" class=\"img\" height=\"auto\" loading=\"lazy\" src=\"../assets_release_notes/d36cee8-nh_link_url.png\" title=\"ảnh link url.png\" width=\"auto\" style=\"max-width:100%; height:auto; max-width:100%; height:auto; max-width:100%; height:auto;\"/></span></span>\n<p>** <strong>Show Username instead of Fullname</strong></p>\n<ul>\n<li>In the account settings, the user can change the user name.</li>\n</ul>\n<span aria-label=\"Expand image\" class=\"img lightbox closed\" role=\"button\" tabindex=\"0\"><span class=\"lightbox-inner\"><img alt=\"1912\" class=\"img\" height=\"auto\" loading=\"lazy\" src=\"../assets_release_notes/cf0a16e-nh_2.png\" title=\"ảnh 2.png\" width=\"auto\" style=\"max-width:100%; height:auto; max-width:100%; height:auto; max-width:100%; height:auto;\"/></span></span>\n<ul>\n<li>Display Username instead of Full Name.</li>\n</ul>\n<span aria-label=\"Expand image\" class=\"img lightbox closed\" role=\"button\" tabindex=\"0\"><span class=\"lightbox-inner\"><img alt=\"1915\" class=\"img\" height=\"auto\" loading=\"lazy\" src=\"../assets_release_notes/0587328-nh_3.png\" title=\"ảnh 3.png\" width=\"auto\" style=\"max-width:100%; height:auto; max-width:100%; height:auto; max-width:100%; height:auto;\"/></span></span>\n<p>** <strong>Add data column</strong></p>\n<ul>\n<li>In the task screen, in the Shipment section, The Transpot Handing Unit column is displayed. Users can tick to show columns or hide columns.</li>\n</ul>\n<span aria-label=\"Expand image\" class=\"img lightbox closed\" role=\"button\" tabindex=\"0\"><span class=\"lightbox-inner\"><img alt=\"1819\" class=\"img\" height=\"auto\" loading=\"lazy\" src=\"../assets_release_notes/079e8c0-nh_4.png\" title=\"ảnh 4.png\" width=\"auto\" style=\"max-width:100%; height:auto; max-width:100%; height:auto; max-width:100%; height:auto;\"/></span></span></div></section></div></article></div></main>",
+  "tags": [],
+  "lang": "en",
+  "status": "ready",
+  "updated_at": "2025-10-27T03:45:41Z",
+  "scraped": true,
+  "_readme_category": "changelog"
+}

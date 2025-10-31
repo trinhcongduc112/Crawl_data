@@ -1,0 +1,21 @@
+{
+  "origin_url": "https://docs.abivin.com/docs/pdp-in-house-fleet-web",
+  "origin_host": "docs.abivin.com",
+  "collection": "abivin-docs",
+  "section": "user_guide",
+  "parents_segments": [
+    "docs"
+  ],
+  "parent_slug": null,
+  "order_index": 83,
+  "old_slug": "docs__pdp-in-house-fleet-web",
+  "new_slug": "docs__pdp-in-house-fleet-web",
+  "title": "[Intercity] PDP Model",
+  "html_content": "<main class=\"SuperHubDoc3Z-1XSVTg-Q1 rm-Guides\" id=\"content\"><div class=\"SuperHubDoc-container2RY1FPE4Ewze rm-Container rm-Container_flex\"><article class=\"SuperHubDoc-article3ArTrEavUTKg rm-Article rm-Guides-SuperHub\"><div class=\"grid-container-fluid\" id=\"content-container\"><section class=\"content-body grid-75\"><div class=\"rm-Markdown markdown-body rm-Markdown markdown-body ng-non-bindable\" data-testid=\"RDMD\" style=\"margin-left:31px\"><ul>\n<li>In this model, the delivery fleet belongs to your organization. When assigned delivery tasks, they will start at the parking garage, travel to one or more locations (Defined as <strong>Origin customers</strong>) to pick up products, then deliver to final destinations (Defined as <strong>Destination customers</strong>) to deliver products</li>\n<li><strong>Note</strong>: This model can be set up on the same account that's currently running VRP/DC Model. You would need to create separate Branches to run it</li>\n</ul>\n<blockquote class=\"callout callout_okay\" theme=\"👍\"><span class=\"callout-icon\">👍</span><h3 class=\"heading heading-3 header-scroll\"><div class=\"heading-anchor anchor waypoint\" id=\"compatible-with-vrpdc-model\"></div><div class=\"heading-text\">Compatible with VRP/DC model</div><a aria-label=\"Skip link to Compatible with VRP/DC model\" class=\"heading-anchor-icon fa fa-regular fa-anchor\" href=\"#compatible-with-vrpdc-model\"></a></h3><ul>\n<li>You can run this model simultaneously with the VRP/DC model on the same account, provided that the Organization hierarchy in your account has at least two Branches, one Branch is set up for this model and the other is set up for VRP/DC model</li>\n<li>Apart from VRP/DC model, none of the remaining models can run simultaneously with this model on the same account</li>\n</ul></blockquote></div><div class=\"UpdatedAt\"><p class=\"DateLine\"><i class=\"icon icon-watch\"></i>Updated<!-- --> <!-- -->about 1 month ago<!-- --> </p></div><hr class=\"NextStepsDivider\"/></section><section class=\"content-toc grid-25\"></section></div><div class=\"ModalWrapper\" id=\"tutorialmodal-root\"></div></article></div></main>",
+  "tags": [],
+  "lang": "en",
+  "status": "ready",
+  "updated_at": "2025-10-27T03:47:09Z",
+  "scraped": true,
+  "_readme_category": "docs"
+}

@@ -1,0 +1,21 @@
+{
+  "origin_url": "https://docs.abivin.com/reference/post_orders-getinfocreatepurchaseorder",
+  "origin_host": "docs.abivin.com",
+  "collection": "abivin-docs",
+  "section": "developer_guide",
+  "parents_segments": [
+    "reference"
+  ],
+  "parent_slug": null,
+  "order_index": 59,
+  "old_slug": "reference__post_orders-getinfocreatepurchaseorder",
+  "new_slug": "reference__post_orders-getinfocreatepurchaseorder",
+  "title": "/orders/getInfoCreatePurchaseOrder",
+  "html_content": "<article class=\"rm-Article\" id=\"content\"></article>",
+  "tags": [],
+  "lang": "en",
+  "status": "ready",
+  "updated_at": "2025-10-29T09:53:10Z",
+  "scraped": true,
+  "_readme_category": "reference"
+}

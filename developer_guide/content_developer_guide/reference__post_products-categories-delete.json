@@ -1,0 +1,21 @@
+{
+  "origin_url": "https://docs.abivin.com/reference/post_products-categories-delete",
+  "origin_host": "docs.abivin.com",
+  "collection": "abivin-docs",
+  "section": "developer_guide",
+  "parents_segments": [
+    "reference"
+  ],
+  "parent_slug": null,
+  "order_index": 74,
+  "old_slug": "reference__post_products-categories-delete",
+  "new_slug": "reference__post_products-categories-delete",
+  "title": "/products/categories/delete",
+  "html_content": "<article class=\"rm-Article\" id=\"content\"></article>",
+  "tags": [],
+  "lang": "en",
+  "status": "ready",
+  "updated_at": "2025-10-29T09:53:44Z",
+  "scraped": true,
+  "_readme_category": "reference"
+}

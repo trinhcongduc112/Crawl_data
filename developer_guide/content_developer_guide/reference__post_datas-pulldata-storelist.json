@@ -1,0 +1,21 @@
+{
+  "origin_url": "https://docs.abivin.com/reference/post_datas-pulldata-storelist",
+  "origin_host": "docs.abivin.com",
+  "collection": "abivin-docs",
+  "section": "developer_guide",
+  "parents_segments": [
+    "reference"
+  ],
+  "parent_slug": null,
+  "order_index": 39,
+  "old_slug": "reference__post_datas-pulldata-storelist",
+  "new_slug": "reference__post_datas-pulldata-storelist",
+  "title": "/datas/pullData/storeList",
+  "html_content": "<article class=\"rm-Article\" id=\"content\"></article>",
+  "tags": [],
+  "lang": "en",
+  "status": "ready",
+  "updated_at": "2025-10-29T09:52:26Z",
+  "scraped": true,
+  "_readme_category": "reference"
+}

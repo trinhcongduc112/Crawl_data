@@ -1,0 +1,21 @@
+{
+  "origin_url": "https://docs.abivin.com/docs/inbound-logistics",
+  "origin_host": "docs.abivin.com",
+  "collection": "abivin-docs",
+  "section": "user_guide",
+  "parents_segments": [
+    "docs"
+  ],
+  "parent_slug": null,
+  "order_index": 59,
+  "old_slug": "docs__inbound-logistics",
+  "new_slug": "docs__inbound-logistics",
+  "title": "Inbound Logistics",
+  "html_content": "<main class=\"SuperHubDoc3Z-1XSVTg-Q1 rm-Guides\" id=\"content\"><div class=\"SuperHubDoc-container2RY1FPE4Ewze rm-Container rm-Container_flex\"><article class=\"SuperHubDoc-article3ArTrEavUTKg rm-Article rm-Guides-SuperHub\"><div class=\"grid-container-fluid\" id=\"content-container\"><section class=\"content-body grid-75\"><div class=\"rm-Markdown markdown-body rm-Markdown markdown-body ng-non-bindable\" data-testid=\"RDMD\" style=\"margin-left:31px\"><figure><span aria-label=\"702\" class=\"img lightbox closed\" role=\"button\" tabindex=\"0\"><span class=\"lightbox-inner\"><img alt=\"702\" class=\"img img-align-center\" height=\"auto\" loading=\"lazy\" src=\"../assets_user_guide/391e790-WMS.png\" title=\"WMS.png\" width=\"auto\" style=\"max-width:100%; height:auto; max-width:100%; height:auto; max-width:100%; height:auto;\"/><figcaption><p>Inbound Logistics Process</p></figcaption></span></span></figure>\n<h2 class=\"heading heading-2 header-scroll\"><div class=\"heading-anchor anchor waypoint\" id=\"receiving\"></div><div class=\"heading-text\">Receiving</div><a aria-label=\"Skip link to Receiving\" class=\"heading-anchor-icon fa fa-regular fa-anchor\" href=\"#receiving\"></a></h2>\n<p>Receiving is the process of confirming that you received what you order. Data collected from receiving determines what your accounting deparment pays for your suppliers.</p>\n<h2 class=\"heading heading-2 header-scroll\"><div class=\"heading-anchor anchor waypoint\" id=\"put-away\"></div><div class=\"heading-text\">Put away</div><a aria-label=\"Skip link to Put away\" class=\"heading-anchor-icon fa fa-regular fa-anchor\" href=\"#put-away\"></a></h2>\n<p>Once the goods are confirmed in full. A \"Put away\" process will be triggered. This happens from the Warehouse Manager to bring items from the truck container or the unloading area to the warehouse shelves.</p></div><div class=\"UpdatedAt\"><p class=\"DateLine\"><i class=\"icon icon-watch\"></i>Updated<!-- --> <!-- -->about 1 month ago<!-- --> </p></div><hr class=\"NextStepsDivider\"/></section><section class=\"content-toc grid-25\"></section></div><div class=\"ModalWrapper\" id=\"tutorialmodal-root\"></div></article></div></main>",
+  "tags": [],
+  "lang": "en",
+  "status": "ready",
+  "updated_at": "2025-10-27T03:46:50Z",
+  "scraped": true,
+  "_readme_category": "docs"
+}

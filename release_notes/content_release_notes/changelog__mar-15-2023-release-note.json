@@ -1,0 +1,21 @@
+{
+  "origin_url": "https://docs.abivin.com/changelog/mar-15-2023-release-note",
+  "origin_host": "docs.abivin.com",
+  "collection": "abivin-docs",
+  "section": "release_notes",
+  "parents_segments": [
+    "changelog"
+  ],
+  "parent_slug": null,
+  "order_index": 11,
+  "old_slug": "changelog__mar-15-2023-release-note",
+  "new_slug": "changelog__mar-15-2023-release-note",
+  "title": "Mar 15, 2023 Release Note",
+  "html_content": "<main class=\"rm-Changelog\" id=\"content\"><div class=\"rm-Container rm-ContainerNarrow\"><article class=\"ChangelogPage2ByKk2Tbv2Rx ChangelogPage_listtQrcObF5m4bD rm-Changelog-post\" id=\"mar-15,-2023-release-note\"><div align=\"center\" class=\"Flex Flex_row ChangelogPage_back3w-yJ7dzamGo\" justify=\"end\" style=\"--flex-gap:var(--md)\"><a class=\"Button Button_sm Button_text ChangelogPost_backVFYixWm1Jvy7\" href=\"https://docs.abivin.com/changelog\"><span class=\"icon-arrow-left2 ChangelogPost_back-icon2yl4BUUuRf8A\"></span>Back to All</a></div><div class=\"ChangelogPost23xgeRV24eRI ChangelogPage_list-post\"><section class=\"ChangelogPost_textdx2lvBFg0xLI\"><div class=\"rm-Markdown markdown-body\" data-testid=\"RDMD\"><ul>\n<li>Add the Get started page</li>\n</ul>\n<h2 class=\"heading heading-2 header-scroll\"><div class=\"heading-anchor anchor waypoint\" id=\"new-features--improvements\"></div><div class=\"heading-text\">New Features &amp; Improvements</div><a aria-label=\"Skip link to New Features &amp; Improvements\" class=\"heading-anchor-icon fa fa-regular fa-anchor\" href=\"#new-features--improvements\"></a></h2>\n<p>** <strong>Get started page</strong></p>\n<ul>\n<li>We are happy to introduce to you the Get started page. From now, after logging in, you can find tutorials, and features of our product. You can also use some shortcuts to make your work faster and easier.</li>\n</ul>\n<figure><span aria-label=\"1747\" class=\"img lightbox closed\" role=\"button\" tabindex=\"0\"><span class=\"lightbox-inner\"><img alt=\"1747\" class=\"img img-align-center\" height=\"auto\" loading=\"lazy\" src=\"../assets_release_notes/2127927-10.png\" title=\"10.png\" width=\"auto\" style=\"max-width:100%; height:auto; max-width:100%; height:auto; max-width:100%; height:auto;\"/><figcaption><p>Get Started page</p></figcaption></span></span></figure></div></section></div></article></div></main>",
+  "tags": [],
+  "lang": "en",
+  "status": "ready",
+  "updated_at": "2025-10-27T03:45:43Z",
+  "scraped": true,
+  "_readme_category": "changelog"
+}

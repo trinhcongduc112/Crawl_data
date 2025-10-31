@@ -1,0 +1,21 @@
+{
+  "origin_url": "https://docs.abivin.com/docs/install-apk-files-on-android",
+  "origin_host": "docs.abivin.com",
+  "collection": "abivin-docs",
+  "section": "user_guide",
+  "parents_segments": [
+    "docs"
+  ],
+  "parent_slug": null,
+  "order_index": 60,
+  "old_slug": "docs__install-apk-files-on-android",
+  "new_slug": "docs__install-apk-files-on-android",
+  "title": "Install APK files",
+  "html_content": "<main class=\"SuperHubDoc3Z-1XSVTg-Q1 rm-Guides\" id=\"content\"><div class=\"SuperHubDoc-container2RY1FPE4Ewze rm-Container rm-Container_flex\"><article class=\"SuperHubDoc-article3ArTrEavUTKg rm-Article rm-Guides-SuperHub\"><div class=\"grid-container-fluid\" id=\"content-container\"><section class=\"content-body grid-75\"><div class=\"rm-Markdown markdown-body rm-Markdown markdown-body ng-non-bindable\" data-testid=\"RDMD\" style=\"margin-left:31px\"><p>Step 1: Go to Settings on Android, select Security.</p>\n<span aria-label=\"Expand image\" class=\"img lightbox closed\" role=\"button\" tabindex=\"0\"><span class=\"lightbox-inner\"><img alt=\"351\" class=\"img\" height=\"auto\" loading=\"lazy\" src=\"../assets_user_guide/0740ab7-s1.png\" title=\"s1.png\" width=\"auto\" style=\"max-width:100%; height:auto; max-width:100%; height:auto; max-width:100%; height:auto;\"/></span></span>\n<p>Step 2: Scroll down, select Unknown sources</p>\n<span aria-label=\"Expand image\" class=\"img lightbox closed\" role=\"button\" tabindex=\"0\"><span class=\"lightbox-inner\"><img alt=\"350\" class=\"img\" height=\"auto\" loading=\"lazy\" src=\"../assets_user_guide/e53b443-s2.png\" title=\"s2.png\" width=\"auto\" style=\"max-width:100%; height:auto; max-width:100%; height:auto; max-width:100%; height:auto;\"/></span></span>\n<p>Step 3: Find the APK file you downloaded, click to install (You can download this file from the link given to you from Google Drive. Please ask Abivin team for the link if you haven't got it).</p>\n<span aria-label=\"Expand image\" class=\"img lightbox closed\" role=\"button\" tabindex=\"0\"><span class=\"lightbox-inner\"><img alt=\"347\" class=\"img\" height=\"auto\" loading=\"lazy\" src=\"../assets_user_guide/5d56c2f-s3.png\" title=\"s3.png\" width=\"auto\" style=\"max-width:100%; height:auto; max-width:100%; height:auto; max-width:100%; height:auto;\"/></span></span>\n<p>Step 4: Perform the installation.</p>\n<span aria-label=\"Expand image\" class=\"img lightbox closed\" role=\"button\" tabindex=\"0\"><span class=\"lightbox-inner\"><img alt=\"349\" class=\"img\" height=\"auto\" loading=\"lazy\" src=\"../assets_user_guide/f81dfcf-s4.png\" title=\"s4.png\" width=\"auto\" style=\"max-width:100%; height:auto; max-width:100%; height:auto; max-width:100%; height:auto;\"/></span></span>\n<p>After install, click application and login to start</p>\n<span aria-label=\"Expand image\" class=\"img lightbox closed\" role=\"button\" tabindex=\"0\"><span class=\"lightbox-inner\"><img alt=\"345\" class=\"img\" height=\"auto\" loading=\"lazy\" src=\"../assets_user_guide/c7caaa2-s5.png\" title=\"s5.png\" width=\"auto\" style=\"max-width:100%; height:auto; max-width:100%; height:auto; max-width:100%; height:auto;\"/></span></span></div><div class=\"UpdatedAt\"><p class=\"DateLine\"><i class=\"icon icon-watch\"></i>Updated<!-- --> <!-- -->about 1 month ago<!-- --> </p></div><hr class=\"NextStepsDivider\"/></section><section class=\"content-toc grid-25\"></section></div><div class=\"ModalWrapper\" id=\"tutorialmodal-root\"></div></article></div></main>",
+  "tags": [],
+  "lang": "en",
+  "status": "ready",
+  "updated_at": "2025-10-27T03:46:50Z",
+  "scraped": true,
+  "_readme_category": "docs"
+}

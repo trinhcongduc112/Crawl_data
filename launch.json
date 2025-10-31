@@ -1,0 +1,75 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        // 1) Export ReadMe → user_guide + release_notes
+        "name": "Export ReadMe → data_docs03",
+        "type": "python",
+        "request": "launch",
+        "program": "${workspaceFolder}/readme_export_sections.py",
+        "args": [
+          "--out", "C:\\Abivin\\data_docs03",
+          "--version", "v4.0",
+          "--map", "user-guide:user_guide:user-guide,release-notes:release_notes:release-notes"
+        ],
+        "console": "integratedTerminal",
+        "cwd": "${workspaceFolder}",
+        "envFile": "${workspaceFolder}/.env",
+        "justMyCode": true
+      },
+      {
+        // 2) Export Swagger/OpenAPI → developer_guide
+        "name": "Export Swagger → developer_guide",
+        "type": "python",
+        "request": "launch",
+        "program": "${workspaceFolder}/swagger_export_developer_guide.py",
+        "args": [
+          "--spec", "https://<demo-api>/openapi.json",
+          "--out", "C:\\Abivin\\data_docs03"
+        ],
+        "console": "integratedTerminal",
+        "cwd": "${workspaceFolder}",
+        "envFile": "${workspaceFolder}/.env",
+        "justMyCode": true
+      },
+      {
+        // 3) Import → Odoo (DRY RUN trước)
+        "name": "Import → Odoo (dry-run)",
+        "type": "python",
+        "request": "launch",
+        "program": "${workspaceFolder}/importer_hierarchy.py",
+        "args": [],
+        "console": "integratedTerminal",
+        "cwd": "${workspaceFolder}",
+        "envFile": "${workspaceFolder}/.env",
+        "env": {
+          "DRY_RUN": "true",
+          "BASE_OUTPUT": "C:\\Abivin\\data_docs03"
+        },
+        "justMyCode": true
+      },
+      {
+        // 4) Import → Odoo (ghi thật)
+        "name": "Import → Odoo (live)",
+        "type": "python",
+        "request": "launch",
+        "program": "${workspaceFolder}/importer_hierarchy.py",
+        "args": [],
+        "console": "integratedTerminal",
+        "cwd": "${workspaceFolder}",
+        "envFile": "${workspaceFolder}/.env",
+        "env": {
+          "DRY_RUN": "false",
+          "BASE_OUTPUT": "C:\\Abivin\\data_docs03"
+        },
+        "justMyCode": true
+      }
+    ],
+    "compounds": [
+      {
+        "name": "Export All (ReadMe + Swagger)",
+        "configurations": ["Export ReadMe → data_docs03", "Export Swagger → developer_guide"]
+      }
+    ]
+  }
+  

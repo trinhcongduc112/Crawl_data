@@ -1,0 +1,21 @@
+{
+  "origin_url": "https://docs.abivin.com/docs/freight-transport-mobile-app-interface",
+  "origin_host": "docs.abivin.com",
+  "collection": "abivin-docs",
+  "section": "user_guide",
+  "parents_segments": [
+    "docs"
+  ],
+  "parent_slug": null,
+  "order_index": 17,
+  "old_slug": "docs__freight-transport-mobile-app-interface",
+  "new_slug": "docs__freight-transport-mobile-app-interface",
+  "title": "Mobile App Interface",
+  "html_content": "<main class=\"SuperHubDoc3Z-1XSVTg-Q1 rm-Guides\" id=\"content\"><div class=\"SuperHubDoc-container2RY1FPE4Ewze rm-Container rm-Container_flex\"><article class=\"SuperHubDoc-article3ArTrEavUTKg rm-Article rm-Guides-SuperHub\"><div class=\"grid-container-fluid\" id=\"content-container\"><section class=\"content-body grid-75\"><div class=\"rm-Markdown markdown-body rm-Markdown markdown-body ng-non-bindable\" data-testid=\"RDMD\" style=\"margin-left:31px\"><p>As a semi trailer truck driver, when first logging in to Abivin vRoute Mobile App, the driver will see an interface similar to this:</p>\n<span aria-label=\"Expand image\" class=\"img lightbox closed\" role=\"button\" tabindex=\"0\"><span class=\"lightbox-inner\"><img alt=\"1080\" class=\"img border\" height=\"auto\" loading=\"lazy\" src=\"../assets_user_guide/48a45fc-WeChat_Image_20190709123027.jpg\" title=\"WeChat Image_20190709123027.jpg\" width=\"auto\" style=\"max-width:100%; height:auto; max-width:100%; height:auto; max-width:100%; height:auto;\"/></span></span>\n<p>The Abivin vRoute Mobile app for freight transport drivers is categorized into 4 main tabs:</p>\n<ul>\n<li><strong>Shipments</strong>: The driver can see the shipment he has requested or is currently delivering.</li>\n<li><strong>History</strong>: The driver can see past shipments assigned to the vehicle which he's driving.</li>\n<li><strong>Partners</strong>: The driver can see a list of customers and suppliers.</li>\n<li><strong>Freight</strong>: The driver can see a list of available containers and trailers ready for delivery. He can choose what container and trailer he wants to deliver.</li>\n</ul>\n<span aria-label=\"Expand image\" class=\"img lightbox closed\" role=\"button\" tabindex=\"0\"><span class=\"lightbox-inner\"><img alt=\"4320\" class=\"img border\" height=\"auto\" loading=\"lazy\" src=\"../assets_user_guide/fda111c-SNP_Mobile_UI.png\" title=\"SNP Mobile UI.png\" width=\"auto\" style=\"max-width:100%; height:auto; max-width:100%; height:auto; max-width:100%; height:auto;\"/></span></span>\n<p>On the top right side of the screen, by tapping on the user icon <i class=\"fa-regular fa-user\"></i>, the driver can access other settings including <strong>Notifications</strong> and <strong>Settings</strong>, or he can <strong>Log out</strong> of his account when he finishes his shipments.</p>\n<span aria-label=\"Expand image\" class=\"img lightbox closed\" role=\"button\" tabindex=\"0\"><span class=\"lightbox-inner\"><img alt=\"2400\" class=\"img border\" height=\"auto\" loading=\"lazy\" src=\"../assets_user_guide/a558e9d-user_snp.png\" title=\"user snp.png\" width=\"auto\" style=\"max-width:100%; height:auto; max-width:100%; height:auto; max-width:100%; height:auto;\"/></span></span></div><div class=\"UpdatedAt\"><p class=\"DateLine\"><i class=\"icon icon-watch\"></i>Updated<!-- --> <!-- -->about 1 month ago<!-- --> </p></div><hr class=\"NextStepsDivider\"/></section><section class=\"content-toc grid-25\"></section></div><div class=\"ModalWrapper\" id=\"tutorialmodal-root\"></div></article></div></main>",
+  "tags": [],
+  "lang": "en",
+  "status": "ready",
+  "updated_at": "2025-10-27T03:46:17Z",
+  "scraped": true,
+  "_readme_category": "docs"
+}
