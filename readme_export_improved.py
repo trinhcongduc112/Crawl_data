@@ -257,39 +257,349 @@ def parse_sidebar_navigation(soup: BeautifulSoup, base_url: str) -> Dict[str, Di
     return nav_structure
 
 
-def find_all_pages_in_category(category_url: str, category_slug: str) -> List[str]:
+def extract_links_in_order(element, base_url: str, category_slug: str) -> List[Tuple[str, str]]:
     """
-    Tìm tất cả pages trong category bằng cách:
-    1. Lấy từ sidebar navigation
-    2. Lấy từ links trong page
+    Extract links theo đúng thứ tự DOM traversal
+    Returns: List of (url, title) tuples
+    """
+    links = []
+    seen_hrefs = set()
+    
+    def traverse(node):
+        """Recursive traversal để giữ đúng thứ tự"""
+        if node.name == 'a':
+            href = node.get('href', '')
+            if href and href not in seen_hrefs:
+                # Convert to absolute URL
+                if href.startswith('/'):
+                    full_url = f"https://{PROJECT_HOST}{href}"
+                else:
+                    full_url = urljoin(base_url, href)
+                
+                # Chỉ lấy links thuộc category này
+                if category_slug in full_url:
+                    title = node.get_text(strip=True)
+                    if title:  # Chỉ lấy link có text
+                        seen_hrefs.add(href)
+                        links.append((full_url, title))
+        
+        # Tiếp tục traverse children
+        if hasattr(node, 'children'):
+            for child in node.children:
+                if hasattr(child, 'name'):  # Chỉ process elements
+                    traverse(child)
+    
+    traverse(element)
+    return links
+
+
+def find_all_pages_in_category(category_url: str, category_slug: str) -> Tuple[List[str], Dict]:
+    """
+    Tìm tất cả pages trong category BẰNG CÁCH:
+    1. Lấy từ sidebar navigation THEO ĐÚNG THỨ TỰ DOM TRAVERSAL
+    2. Lấy từ links trong page (nếu chưa có)
     """
     print(f"  Parsing navigation from: {category_url}")
     
     html, soup = scrape_page(category_url)
     
-    # Parse navigation structure
+    # BƯỚC 1: Lấy cấu trúc cha-con (để dùng sau)
     nav_structure = parse_sidebar_navigation(soup, category_url)
     
-    # Also collect all links
-    all_urls = set()
+    # BƯỚC 2: XÂY DỰNG DANH SÁCH CÓ THỨ TỰ (QUAN TRỌNG - SỬA LẠI)
+    ordered_urls = []
+    seen_urls = set()
+    url_to_title = {}  # Map URL -> title để dùng sau
+
+    # Hàm trợ giúp để thêm URL vào danh sách
+    def add_url_if_new(url: str, title: str = ""):
+        if url and url not in seen_urls and category_slug in url:
+            seen_urls.add(url)
+            ordered_urls.append(url)
+            if title:
+                url_to_title[url] = title
+
+    # Thêm trang category gốc (trang chủ của section)
+    add_url_if_new(category_url)
+
+    # Lấy sidebar
+    sidebar = soup.find('nav') or soup.find('aside') or soup.find('div', class_='sidebar') or soup.find('div', class_=lambda x: x and 'sidebar' in ' '.join(x).lower())
     
-    # Add all URLs from navigation
-    for url in nav_structure.keys():
-        if category_slug in url:
-            all_urls.add(url)
+    # ƯU TIÊN 1: Lấy link từ sidebar TRƯỚC (theo đúng thứ tự DOM)
+    if sidebar:
+        print("  Processing sidebar links (in DOM order)...")
+        sidebar_links = extract_links_in_order(sidebar, category_url, category_slug)
+        for full_url, title in sidebar_links:
+            add_url_if_new(full_url, title)
+            # Cập nhật nav_structure với title chính xác
+            if full_url in nav_structure:
+                nav_structure[full_url]['title'] = title
+            
+    # ƯU TIÊN 2: Lấy tất cả các link khác từ nội dung chính
+    # (Phòng trường hợp sidebar bị thiếu link)
+    print("  Processing remaining page links...")
+    main_content = soup.find('main') or soup.find('article') or soup.find('body')
+    if main_content:
+        content_links = extract_links_in_order(main_content, category_url, category_slug)
+        for full_url, title in content_links:
+            add_url_if_new(full_url, title)
     
-    # Also get links from page content
-    for link in soup.find_all('a', href=True):
-        href = link.get('href', '')
-        if href.startswith('/'):
-            full_url = f"https://{PROJECT_HOST}{href}"
-            if href.startswith(f'/{category_slug}'):
-                all_urls.add(full_url)
+    print(f"  Found {len(ordered_urls)} unique pages (in order)")
     
-    all_urls.add(category_url)
+    # Trả về danh sách ĐÃ CÓ THỨ TỰ (không sorted alphabet)
+    return ordered_urls, nav_structure
+
+
+def parse_openapi_file(openapi_file: str, section_key: str, out_base: str) -> Tuple[int, int]:
+    """
+    Parse OpenAPI/Swagger JSON file và tạo article JSON files
+    Đây là cách đúng để xử lý Developer Guide (Swagger) thay vì scrape HTML
+    """
+    print(f"\n{'='*60}")
+    print(f"=== Parsing OpenAPI: {os.path.basename(openapi_file)} ===")
+    print(f"{'='*60}\n")
     
-    print(f"  Found {len(all_urls)} unique pages")
-    return sorted(list(all_urls)), nav_structure
+    # Kiểm tra file size trước
+    file_size = os.path.getsize(openapi_file)
+    if file_size < 200:
+        print(f"[WARN] File quá nhỏ ({file_size} bytes) - có thể là file không hợp lệ hoặc chỉ là placeholder")
+        print(f"       Đang kiểm tra nội dung...")
+    
+    # Đọc file và kiểm tra format (tự động xử lý BOM)
+    try:
+        with open(openapi_file, "r", encoding="utf-8-sig") as f:
+            file_content = f.read()
+    except Exception as e:
+        print(f"[ERR] Không thể đọc file: {e}")
+        return 0, 0
+    
+    # Kiểm tra nếu file là JavaScript object (không phải JSON hợp lệ)
+    # Dấu hiệu: có dấu hai chấm nhưng không có quotes quanh keys (hoặc rất ít)
+    file_start = file_content.strip()[:300]
+    has_colon = ':' in file_start
+    has_quotes = '"' in file_start
+    # Nếu có dấu hai chấm nhưng rất ít quotes, có thể là JavaScript object notation
+    if has_colon and file_start.count('"') < 4:
+        print(f"[ERR] File không phải JSON hợp lệ!")
+        print(f"       File hiện tại có vẻ là JavaScript object notation (thiếu quotes)")
+        print(f"       Ví dụ sai: {{ openapi:3.0.0, info: {{title:...}} }}")
+        print(f"       Cần JSON hợp lệ: {{\"openapi\":\"3.0.0\",\"info\":{{\"title\":...}}}}")
+        print(f"\n       Hướng dẫn sửa:")
+        print(f"       1. Mở trang Developer Guide/API Reference trên docs.abivin.com")
+        print(f"       2. Mở Developer Tools (F12) > Network tab")
+        print(f"       3. Tải lại trang (F5)")
+        print(f"       4. Tìm request có tên chứa 'openapi' hoặc 'swagger' (thường là .json)")
+        print(f"       5. Right-click > Open in new tab > Copy URL")
+        print(f"       6. Download file đầy đủ bằng curl/wget hoặc trình duyệt")
+        print(f"       7. Đảm bảo file là JSON hợp lệ và có trường 'paths' chứa các endpoints")
+        return 0, 0
+    
+    # Parse JSON
+    try:
+        openapi_spec = json.loads(file_content)
+    except json.JSONDecodeError as e:
+        print(f"[ERR] Lỗi parse JSON: {e}")
+        print(f"       Dòng {e.lineno}, cột {e.colno}: {e.msg}")
+        print(f"       File không phải JSON hợp lệ. Vui lòng kiểm tra lại.")
+        return 0, 0
+    except Exception as e:
+        print(f"[ERR] Lỗi không xác định khi parse file: {e}")
+        return 0, 0
+    
+    # Kiểm tra cấu trúc OpenAPI
+    if not isinstance(openapi_spec, dict):
+        print(f"[ERR] File không phải là OpenAPI spec hợp lệ (phải là object/dict)")
+        return 0, 0
+    
+    # Kiểm tra trường bắt buộc
+    if "openapi" not in openapi_spec and "swagger" not in openapi_spec:
+        print(f"[WARN] File thiếu trường 'openapi' hoặc 'swagger' - có thể không phải OpenAPI spec")
+    
+    # Kiểm tra paths - đây là phần quan trọng nhất
+    paths = openapi_spec.get("paths", {})
+    if not paths or not isinstance(paths, dict):
+        print(f"[ERR] File thiếu hoặc không có trường 'paths'!")
+        print(f"       Đây là trường bắt buộc chứa định nghĩa các API endpoints")
+        print(f"       File hiện tại chỉ có metadata, không có endpoints thực tế")
+        print(f"\n       Cần tải lại file OpenAPI đầy đủ từ:")
+        print(f"       - Network tab trong Developer Tools")
+        print(f"       - Hoặc từ URL: https://docs.abivin.com/reference/openapi.json (nếu có)")
+        return 0, 0
+    
+    # Lấy thông tin API trước khi thông báo
+    info = openapi_spec.get("info", {})
+    api_title = info.get("title", "API Documentation")
+    api_version = info.get("version", "1.0.0")
+    api_description = info.get("description", "")
+    servers = openapi_spec.get("servers", [])
+    base_url = servers[0].get("url", "") if servers else ""
+    
+    # Thông báo thành công
+    num_endpoints = sum(len([m for m in p.keys() if m.lower() in ["get", "post", "put", "patch", "delete", "head", "options"]]) 
+                        for p in paths.values())
+    print(f"[OK] File OpenAPI hợp lệ!")
+    print(f"     Title: {api_title}")
+    print(f"     Version: {api_version}")
+    print(f"     Paths: {len(paths)}")
+    print(f"     Endpoints: {num_endpoints}")
+    print(f"     Đang tạo articles...\n")
+    
+    base_folder = os.path.join(out_base, section_key)
+    content_dir = os.path.join(base_folder, f"content_{section_key}")
+    ensure_dir(content_dir)
+    
+    def escape_html(text):
+        if not text:
+            return ""
+        return (str(text).replace("&", "&amp;").replace("<", "&lt;")
+                .replace(">", "&gt;").replace('"', "&quot;"))
+    
+    # Tạo index page
+    index_html = f"<h1>{escape_html(api_title)}</h1>"
+    index_html += f"<p>Version: <code>{escape_html(api_version)}</code></p>"
+    if api_description:
+        index_html += f"<p>{escape_html(api_description)}</p>"
+    if base_url:
+        index_html += f"<p>Base URL: <code>{escape_html(base_url)}</code></p>"
+    index_html += "<h2>Available Endpoints</h2><ul>"
+    
+    articles = []
+    idx = 2
+    
+    for path, path_item in sorted(paths.items()):
+        for method, operation in path_item.items():
+            if method.lower() not in ["get", "post", "put", "patch", "delete", "head", "options"]:
+                continue
+            
+            op_id = operation.get("operationId", f"{method.upper()} {path}")
+            summary = operation.get("summary", op_id)
+            desc = operation.get("description", "")
+            tags = operation.get("tags", [])
+            params = operation.get("parameters", [])
+            req_body = operation.get("requestBody", {})
+            responses = operation.get("responses", {})
+            
+            # Build HTML
+            html_parts = [f"<h1>{escape_html(summary)}</h1>"]
+            html_parts.append(f"<p><strong>Method:</strong> <code>{method.upper()}</code></p>")
+            html_parts.append(f"<p><strong>Path:</strong> <code>{escape_html(path)}</code></p>")
+            
+            if desc:
+                html_parts.append(f"<p>{escape_html(desc)}</p>")
+            if tags:
+                html_parts.append(f"<p><strong>Tags:</strong> {', '.join([f'<code>{escape_html(t)}</code>' for t in tags])}</p>")
+            
+            # Parameters
+            if params:
+                html_parts.append("<h3>Parameters</h3><table border='1' style='border-collapse: collapse;'><tr><th>Name</th><th>In</th><th>Required</th><th>Type</th><th>Description</th></tr>")
+                for p in params:
+                    name = p.get("name", "")
+                    p_in = p.get("in", "")
+                    req = "Yes" if p.get("required", False) else "No"
+                    schema = p.get("schema", {})
+                    p_type = schema.get("type", "")
+                    if schema.get("format"):
+                        p_type += f" ({schema.get('format')})"
+                    p_desc = p.get("description", "")
+                    html_parts.append(f"<tr><td><code>{escape_html(name)}</code></td><td>{escape_html(p_in)}</td><td>{req}</td><td>{escape_html(p_type)}</td><td>{escape_html(p_desc)}</td></tr>")
+                html_parts.append("</table>")
+            
+            # Request Body
+            if req_body:
+                html_parts.append("<h3>Request Body</h3>")
+                content = req_body.get("content", {})
+                if "application/json" in content:
+                    schema = content["application/json"].get("schema", {})
+                    example = content["application/json"].get("example")
+                    if not example and "example" in schema:
+                        example = schema.get("example")
+                    if example:
+                        html_parts.append(f"<pre><code>{json.dumps(example, indent=2, ensure_ascii=False)}</code></pre>")
+                    elif "$ref" in schema:
+                        html_parts.append(f"<p>Schema reference: <code>{schema['$ref']}</code></p>")
+            
+            # Responses
+            if responses:
+                html_parts.append("<h3>Responses</h3>")
+                for status, resp in responses.items():
+                    html_parts.append(f"<h4>HTTP {escape_html(status)}</h4>")
+                    if resp.get("description"):
+                        html_parts.append(f"<p>{escape_html(resp.get('description'))}</p>")
+                    content = resp.get("content", {})
+                    if "application/json" in content:
+                        schema = content["application/json"].get("schema", {})
+                        example = content["application/json"].get("example")
+                        if example:
+                            html_parts.append(f"<pre><code>{json.dumps(example, indent=2, ensure_ascii=False)}</code></pre>")
+            
+            # Create slug
+            safe_path = path.strip("/").replace("/", "__")
+            slug = f"reference__{method.lower()}_{safe_path}" if safe_path else f"reference__{method.lower()}"
+            
+            article = {
+                "origin_url": f"https://{PROJECT_HOST}/reference/{op_id}",
+                "origin_host": PROJECT_HOST,
+                "collection": "abivin-docs",
+                "section": section_key,
+                "parents_segments": ["reference"],
+                "parent_slug": "reference",
+                "order_index": idx,
+                "_id_seq": idx,
+                "old_slug": slug,
+                "new_slug": slug,
+                "title": summary,
+                "html_content": "".join(html_parts),
+                "tags": tags,
+                "lang": "en",
+                "status": "ready",
+                "updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+                "scraped": False,
+                "_readme_category": "reference",
+                "_openapi_source": os.path.basename(openapi_file),
+            }
+            
+            articles.append((slug, article))
+            index_html += f'<li><a href="#{slug}">{escape_html(summary)}</a> - <code>{method.upper()} {escape_html(path)}</code></li>'
+            idx += 1
+    
+    index_html += "</ul>"
+    
+    # Write index
+    index_doc = {
+        "origin_url": f"https://{PROJECT_HOST}/reference",
+        "origin_host": PROJECT_HOST,
+        "collection": "abivin-docs",
+        "section": section_key,
+        "parents_segments": [],
+        "parent_slug": None,
+        "order_index": 1,
+        "_id_seq": 1,
+        "old_slug": "reference",
+        "new_slug": "reference",
+        "title": api_title,
+        "html_content": index_html,
+        "tags": [],
+        "lang": "en",
+        "status": "ready",
+        "updated_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "scraped": False,
+        "_readme_category": "reference",
+        "_openapi_source": os.path.basename(openapi_file),
+    }
+    
+    index_path = os.path.join(content_dir, "reference.json")
+    write_json(index_path, index_doc)
+    print(f"[1/{len(articles)+1}] Created index: reference.json")
+    
+    # Write articles
+    created = 1
+    for slug, article in articles:
+        article_path = os.path.join(content_dir, f"{slug}.json")
+        write_json(article_path, article)
+        created += 1
+    
+    print(f"[OK] Created {created} articles ({len(articles)} endpoints + 1 index)")
+    return created, created
 
 
 def export_category(category_slug: str, section_key: str, root_seg: str, out_base: str) -> Tuple[int, int]:
@@ -414,11 +724,19 @@ def export_category(category_slug: str, section_key: str, root_seg: str, out_bas
 
 def main():
     ap = argparse.ArgumentParser(
-        description="Improved ReadMe scraper with parent-child structure"
+        description="Improved ReadMe scraper with parent-child structure and OpenAPI support"
     )
     ap.add_argument("--out", required=True, help="Base output directory")
-    ap.add_argument("--map", default="changelog:release_notes:changelog,docs:user_guide:docs")
+    ap.add_argument("--map", default="changelog:release_notes:changelog,docs:user_guide:docs",
+                     help="Category mappings: 'category_slug:section_key:root_segment' (comma-separated)")
+    ap.add_argument("--openapi-dir", default=None,
+                     help="Directory containing OpenAPI JSON files (for Developer Guide/Swagger)")
+    ap.add_argument("--openapi-section", default="developer_guide",
+                     help="Section key for OpenAPI files (default: developer_guide)")
     args = ap.parse_args()
+    
+    ensure_dir(args.out)
+    summary = []
     
     # Parse map
     mappings = []
@@ -430,9 +748,7 @@ def main():
             if len(bits) == 3:
                 mappings.append((bits[0], bits[1], bits[2]))
     
-    ensure_dir(args.out)
-    summary = []
-    
+    # Process regular HTML scraping
     for cat_slug, section_key, root_seg in mappings:
         print(f"\n{'='*60}")
         print(f"=== Exporting {section_key} (category: {cat_slug}) ===")
@@ -442,6 +758,32 @@ def main():
             summary.append((section_key, total, wrote))
         except Exception as e:
             print(f"[ERR] Export {section_key} failed: {e}")
+    
+    # Process OpenAPI files (for Developer Guide/Swagger)
+    if args.openapi_dir and os.path.isdir(args.openapi_dir):
+        print(f"\n{'='*60}")
+        print(f"=== Processing OpenAPI files from: {args.openapi_dir} ===")
+        print(f"{'='*60}\n")
+        
+        openapi_files = [f for f in os.listdir(args.openapi_dir) 
+                        if f.endswith(('.json', '.yaml', '.yml'))]
+        
+        if not openapi_files:
+            print(f"[WARN] No OpenAPI files found in '{args.openapi_dir}'")
+            print("\nHướng dẫn lấy OpenAPI file:")
+            print("1. Mở trang Developer Guide trên trình duyệt")
+            print("2. Mở Developer Tools (F12) > Network tab")
+            print("3. Tải lại trang (F5)")
+            print("4. Tìm file .json hoặc .yaml (ví dụ: openapi.json)")
+            print("5. Right-click > Save as > Lưu vào thư mục chỉ định")
+        else:
+            for openapi_file in openapi_files:
+                openapi_path = os.path.join(args.openapi_dir, openapi_file)
+                try:
+                    total, wrote = parse_openapi_file(openapi_path, args.openapi_section, args.out)
+                    summary.append((f"{args.openapi_section} ({openapi_file})", total, wrote))
+                except Exception as e:
+                    print(f"[ERR] Failed to process {openapi_file}: {e}")
     
     # Summary
     if summary:

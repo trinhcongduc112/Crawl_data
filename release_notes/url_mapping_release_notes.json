@@ -1,14 +1,13 @@
 {
-  "https://docs.abivin.com/changelog": "C:\\Abivin\\data_docs03\\release_notes\\content_release_notes\\changelog.json",
-  "https://docs.abivin.com/changelog/apr-05-2023-release-note": "C:\\Abivin\\data_docs03\\release_notes\\content_release_notes\\changelog__apr-05-2023-release-note.json",
-  "https://docs.abivin.com/changelog/dec-29-2022": "C:\\Abivin\\data_docs03\\release_notes\\content_release_notes\\changelog__dec-29-2022.json",
-  "https://docs.abivin.com/changelog/feb-23-2023-release-note": "C:\\Abivin\\data_docs03\\release_notes\\content_release_notes\\changelog__feb-23-2023-release-note.json",
-  "https://docs.abivin.com/changelog/feb-8-2023-release-note": "C:\\Abivin\\data_docs03\\release_notes\\content_release_notes\\changelog__feb-8-2023-release-note.json",
-  "https://docs.abivin.com/changelog/jan-04-2023-release-note": "C:\\Abivin\\data_docs03\\release_notes\\content_release_notes\\changelog__jan-04-2023-release-note.json",
-  "https://docs.abivin.com/changelog/jan-11-2023-release-note": "C:\\Abivin\\data_docs03\\release_notes\\content_release_notes\\changelog__jan-11-2023-release-note.json",
-  "https://docs.abivin.com/changelog/jan-18-2023-release-note": "C:\\Abivin\\data_docs03\\release_notes\\content_release_notes\\changelog__jan-18-2023-release-note.json",
-  "https://docs.abivin.com/changelog/mar-01-2023-release-note": "C:\\Abivin\\data_docs03\\release_notes\\content_release_notes\\changelog__mar-01-2023-release-note.json",
-  "https://docs.abivin.com/changelog/mar-09-2023-release-note": "C:\\Abivin\\data_docs03\\release_notes\\content_release_notes\\changelog__mar-09-2023-release-note.json",
-  "https://docs.abivin.com/changelog/mar-15-2023-release-note": "C:\\Abivin\\data_docs03\\release_notes\\content_release_notes\\changelog__mar-15-2023-release-note.json",
-  "https://docs.abivin.com/changelog?page=2": "C:\\Abivin\\data_docs03\\release_notes\\content_release_notes\\changelog.json"
+  "https://docs.abivin.com/changelog": ".\\release_notes\\content_release_notes\\changelog.json",
+  "https://docs.abivin.com/changelog/apr-05-2023-release-note": ".\\release_notes\\content_release_notes\\changelog__apr-05-2023-release-note.json",
+  "https://docs.abivin.com/changelog/mar-15-2023-release-note": ".\\release_notes\\content_release_notes\\changelog__mar-15-2023-release-note.json",
+  "https://docs.abivin.com/changelog/mar-09-2023-release-note": ".\\release_notes\\content_release_notes\\changelog__mar-09-2023-release-note.json",
+  "https://docs.abivin.com/changelog/mar-01-2023-release-note": ".\\release_notes\\content_release_notes\\changelog__mar-01-2023-release-note.json",
+  "https://docs.abivin.com/changelog/feb-23-2023-release-note": ".\\release_notes\\content_release_notes\\changelog__feb-23-2023-release-note.json",
+  "https://docs.abivin.com/changelog/feb-8-2023-release-note": ".\\release_notes\\content_release_notes\\changelog__feb-8-2023-release-note.json",
+  "https://docs.abivin.com/changelog/jan-18-2023-release-note": ".\\release_notes\\content_release_notes\\changelog__jan-18-2023-release-note.json",
+  "https://docs.abivin.com/changelog/jan-11-2023-release-note": ".\\release_notes\\content_release_notes\\changelog__jan-11-2023-release-note.json",
+  "https://docs.abivin.com/changelog/jan-04-2023-release-note": ".\\release_notes\\content_release_notes\\changelog__jan-04-2023-release-note.json",
+  "https://docs.abivin.com/changelog/dec-29-2022": ".\\release_notes\\content_release_notes\\changelog__dec-29-2022.json"
 }

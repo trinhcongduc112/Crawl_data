@@ -7,15 +7,16 @@
     "docs"
   ],
   "parent_slug": null,
-  "order_index": 15,
+  "order_index": 117,
+  "_id_seq": 117,
   "old_slug": "docs__freight-transport-barge-select-model",
   "new_slug": "docs__freight-transport-barge-select-model",
   "title": "Select Management Model",
-  "html_content": "<main class=\"SuperHubDoc3Z-1XSVTg-Q1 rm-Guides\" id=\"content\"><div class=\"SuperHubDoc-container2RY1FPE4Ewze rm-Container rm-Container_flex\"><article class=\"SuperHubDoc-article3ArTrEavUTKg rm-Article rm-Guides-SuperHub\"><div class=\"grid-container-fluid\" id=\"content-container\"><section class=\"content-body grid-75\"><div class=\"rm-Markdown markdown-body rm-Markdown markdown-body ng-non-bindable\" data-testid=\"RDMD\" style=\"margin-left:31px\"><ul>\n<li>After completing the registration process and logging in to your account on Web app, you will be greeted with this pop out form:</li>\n</ul>\n<span aria-label=\"Expand image\" class=\"img lightbox closed\" role=\"button\" tabindex=\"0\"><span class=\"lightbox-inner\"><img alt=\"1315\" class=\"img border\" height=\"auto\" loading=\"lazy\" src=\"../assets_user_guide/6b87339-Abivin_first_page_after_sign_up.png\" title=\"Abivin first page after sign up.png\" width=\"auto\" style=\"max-width:100%; height:auto; max-width:100%; height:auto; max-width:100%; height:auto;\"/></span></span>\n<ul>\n<li>You need to click on the text <strong>Optimal Routing Plan</strong> to correctly select the model</li>\n<li>In the next article, we will be going through the process to create organizations</li>\n</ul></div><div class=\"UpdatedAt\"><p class=\"DateLine\"><i class=\"icon icon-watch\"></i>Updated<!-- --> <!-- -->about 1 month ago<!-- --> </p></div><hr class=\"NextStepsDivider\"/></section><section class=\"content-toc grid-25\"></section></div><div class=\"ModalWrapper\" id=\"tutorialmodal-root\"></div></article></div></main>",
+  "html_content": "<main class=\"SuperHubDoc3Z-1XSVTg-Q1 rm-Guides\" id=\"content\"><div class=\"SuperHubDoc-container2RY1FPE4Ewze rm-Container rm-Container_flex\"><article class=\"SuperHubDoc-article3ArTrEavUTKg rm-Article rm-Guides-SuperHub\"><div class=\"grid-container-fluid\" id=\"content-container\"><section class=\"content-body grid-75\"><div class=\"rm-Markdown markdown-body rm-Markdown markdown-body ng-non-bindable\" data-testid=\"RDMD\" style=\"margin-left:31px\"><ul>\n<li>After completing the registration process and logging in to your account on Web app, you will be greeted with this pop out form:</li>\n</ul>\n<span aria-label=\"Expand image\" class=\"img lightbox closed\" role=\"button\" tabindex=\"0\"><span class=\"lightbox-inner\"><img alt=\"1315\" class=\"img border\" height=\"auto\" loading=\"lazy\" src=\"https://files.readme.io/6b87339-Abivin_first_page_after_sign_up.png\" title=\"Abivin first page after sign up.png\" width=\"auto\"/></span></span>\n<ul>\n<li>You need to click on the text <strong>Optimal Routing Plan</strong> to correctly select the model</li>\n<li>In the next article, we will be going through the process to create organizations</li>\n</ul></div><div class=\"UpdatedAt\"><p class=\"DateLine\"><i class=\"icon icon-watch\"></i>Updated<!-- --> <!-- -->about 1 month ago<!-- --> </p></div><hr class=\"NextStepsDivider\"/></section><section class=\"content-toc grid-25\"></section></div><div class=\"ModalWrapper\" id=\"tutorialmodal-root\"></div></article></div></main>",
   "tags": [],
   "lang": "en",
   "status": "ready",
-  "updated_at": "2025-10-27T03:46:15Z",
+  "updated_at": "2025-11-03T02:44:05Z",
   "scraped": true,
   "_readme_category": "docs"
 }

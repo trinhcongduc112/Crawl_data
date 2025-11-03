@@ -6,14 +6,16 @@
   "parents_segments": [],
   "parent_slug": null,
   "order_index": 1,
+  "_id_seq": 1,
   "old_slug": "reference",
   "new_slug": "reference",
-  "title": "Log In",
-  "html_content": "<h1>Request Body</h1>\n<pre>{\n    \"username\": \"...\",\n    \"password\": \"...\"\n}</pre>\n<code>{\n    \"username\": \"...\",\n    \"password\": \"...\"\n}</code>\n<h1>Response Body</h1>\n<h2>Successful Authentication</h2>\n<p>HTTP 200, with JSON response body in which 'token' is the JWT token to be set in cookie 'jwtToken' in next API requests:</p>\n<pre>{\n    \"_id\" : <hash>,\n    \"displayName\" : <full-name>,\n    \"masterId\" : <hash>,\n    \"__v\" : 0,\n    \"coupled\" : [\n    ],\n    \"useType\" : ,\n    \"linkAccounts\" : [\n    ],\n    \"subscriptionExpiry\" : <iso-date>,\n    \"subscriptionCode\" : <string>,\n    \"secret\" : ,\n    \"stopTime\" : ,\n    \"startTime\" : ,\n    \"callPass\" : ,\n    \"callId\" : ,\n    \"globalConfig\" : {\n        \"notification\" : <string>\n    },\n    \"timeFormat\" : <number>,\n    \"phoneNumber\" : <string>,\n    \"isDeleted\" : <bool>,\n    \"profilePicture\" : ,\n    \"description\" : ,\n    \"occupation\" : ,\n    \"createdAt\" : <iso-date>,\n    \"isActive\" : <bool>,\n    \"additionalSocialData\" : ,\n    \"socialData\" : [\n    ],\n    \"socialNetwork\" : ,\n    \"plivo_phone_number\" : ,\n    \"plivo_endpoint_id\" : ,\n    \"plivo_CallUUID\" : ,\n    \"plivo_pwd\" : ,\n    \"plivo_status\" : <number>,\n    \"plivo_updated_username\" : ,\n    \"plivo_username\" : ,\n    \"support_agent\" : <bool>,\n    \"email\" : <email-address>,\n    \"lastName\" : <string>,\n    \"firstName\" : <string>,\n    \"roleIds\" : [\n        <hashes>\n    ],\n    \"organizationIds\" : [\n        <hashes>\n    ],\n    \"username\" : <string>\n}</pre>\n<code>{\n    \"_id\" : <hash>,\n    \"displayName\" : <full-name>,\n    \"masterId\" : <hash>,\n    \"__v\" : 0,\n    \"coupled\" : [\n    ],\n    \"useType\" : ,\n    \"linkAccounts\" : [\n    ],\n    \"subscriptionExpiry\" : <iso-date>,\n    \"subscriptionCode\" : <string>,\n    \"secret\" : ,\n    \"stopTime\" : ,\n    \"startTime\" : ,\n    \"callPass\" : ,\n    \"callId\" : ,\n    \"globalConfig\" : {\n        \"notification\" : <string>\n    },\n    \"timeFormat\" : <number>,\n    \"phoneNumber\" : <string>,\n    \"isDeleted\" : <bool>,\n    \"profilePicture\" : ,\n    \"description\" : ,\n    \"occupation\" : ,\n    \"createdAt\" : <iso-date>,\n    \"isActive\" : <bool>,\n    \"additionalSocialData\" : ,\n    \"socialData\" : [\n    ],\n    \"socialNetwork\" : ,\n    \"plivo_phone_number\" : ,\n    \"plivo_endpoint_id\" : ,\n    \"plivo_CallUUID\" : ,\n    \"plivo_pwd\" : ,\n    \"plivo_status\" : <number>,\n    \"plivo_updated_username\" : ,\n    \"plivo_username\" : ,\n    \"support_agent\" : <bool>,\n    \"email\" : <email-address>,\n    \"lastName\" : <string>,\n    \"firstName\" : <string>,\n    \"roleIds\" : [\n        <hashes>\n    ],\n    \"organizationIds\" : [\n        <hashes>\n    ],\n    \"username\" : <string>\n}</code>\n<h2>Failed Authentication</h2>\n<p>HTTP 4xx, with string message.</p>",
+  "title": "abivin-vroute-algorithms",
+  "html_content": "<h1>abivin-vroute-algorithms</h1><p>Version: <code>4.0</code></p><p>Base URL: <code>https://vapp-test.abivin.vn/</code></p><h2>Available Endpoints</h2><ul><li><a href=\"#reference__get_organizations\">Get Organizations</a> - <code>GET /organizations</code></li></ul>",
   "tags": [],
   "lang": "en",
   "status": "ready",
-  "updated_at": "2025-10-27T04:10:16Z",
-  "scraped": true,
-  "_readme_category": "reference"
+  "updated_at": "2025-11-03T05:03:06Z",
+  "scraped": false,
+  "_readme_category": "reference",
+  "_openapi_source": "abivin-vroute-algorithms.json"
 }

@@ -1,0 +1,25 @@
+{
+  "origin_url": "https://docs.abivin.com/reference/POST /stop_algo",
+  "origin_host": "docs.abivin.com",
+  "collection": "abivin-docs",
+  "section": "developer_guide",
+  "parents_segments": [
+    "reference"
+  ],
+  "parent_slug": "reference",
+  "order_index": 7,
+  "_id_seq": 7,
+  "old_slug": "reference__post_stop_algo",
+  "new_slug": "reference__post_stop_algo",
+  "title": "POST /stop_algo",
+  "html_content": "<h1>POST /stop_algo</h1><p><strong>Method:</strong> <code>POST</code></p><p><strong>Path:</strong> <code>/stop_algo</code></p><p><strong>Tags:</strong> <code>Vehicle_Route_Optimization</code></p><h3>Request Body</h3><p>Schema reference: <code>#/components/schemas/StopalgoRequestData</code></p><h3>Responses</h3><h4>HTTP 200</h4><p>successful operation</p>",
+  "tags": [
+    "Vehicle_Route_Optimization"
+  ],
+  "lang": "en",
+  "status": "ready",
+  "updated_at": "2025-11-03T05:03:06Z",
+  "scraped": false,
+  "_readme_category": "reference",
+  "_openapi_source": "abivin-vapp-algo-apis.json"
+}

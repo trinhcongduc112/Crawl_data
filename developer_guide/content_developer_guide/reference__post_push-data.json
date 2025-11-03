@@ -1,21 +1,25 @@
 {
-  "origin_url": "https://docs.abivin.com/reference/post_push-data",
+  "origin_url": "https://docs.abivin.com/reference/POST /push-data",
   "origin_host": "docs.abivin.com",
   "collection": "abivin-docs",
   "section": "developer_guide",
   "parents_segments": [
     "reference"
   ],
-  "parent_slug": null,
-  "order_index": 88,
+  "parent_slug": "reference",
+  "order_index": 2,
+  "_id_seq": 2,
   "old_slug": "reference__post_push-data",
   "new_slug": "reference__post_push-data",
   "title": "Push data to Abivin's system",
-  "html_content": "<article class=\"rm-Article\" id=\"content\"></article>",
-  "tags": [],
+  "html_content": "<h1>Push data to Abivin's system</h1><p><strong>Method:</strong> <code>POST</code></p><p><strong>Path:</strong> <code>/push-data</code></p><p>Push data to Abivin's system</p><p><strong>Tags:</strong> <code>Data</code></p><h3>Request Body</h3><p>Schema reference: <code>#/components/schemas/Data</code></p><h3>Responses</h3><h4>HTTP 200</h4><p>Successful operation</p><h4>HTTP 400</h4><p>Invalid input</p><h4>HTTP 401</h4><p>Unauthorized</p><h4>HTTP 500</h4><p>Unauthorized</p>",
+  "tags": [
+    "Data"
+  ],
   "lang": "en",
   "status": "ready",
-  "updated_at": "2025-10-29T09:54:15Z",
-  "scraped": true,
-  "_readme_category": "reference"
+  "updated_at": "2025-11-03T05:03:06Z",
+  "scraped": false,
+  "_readme_category": "reference",
+  "_openapi_source": "abivin-integration-api-docs.json"
 }

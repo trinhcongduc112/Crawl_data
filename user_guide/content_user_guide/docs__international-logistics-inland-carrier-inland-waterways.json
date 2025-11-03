@@ -7,15 +7,16 @@
     "docs"
   ],
   "parent_slug": null,
-  "order_index": 61,
+  "order_index": 116,
+  "_id_seq": 116,
   "old_slug": "docs__international-logistics-inland-carrier-inland-waterways",
   "new_slug": "docs__international-logistics-inland-carrier-inland-waterways",
   "title": "[International Logistics] Inland Carrier - Inland waterways",
-  "html_content": "<main class=\"SuperHubDoc3Z-1XSVTg-Q1 rm-Guides\" id=\"content\"><div class=\"SuperHubDoc-container2RY1FPE4Ewze rm-Container rm-Container_flex\"><article class=\"SuperHubDoc-article3ArTrEavUTKg rm-Article rm-Guides-SuperHub\"><div class=\"grid-container-fluid\" id=\"content-container\"><section class=\"content-body grid-75\"><div class=\"rm-Markdown markdown-body rm-Markdown markdown-body ng-non-bindable\" data-testid=\"RDMD\" style=\"margin-left:31px\"><ul>\n<li>A barge is a flat-bottomed ship, built mainly for river and canal transport of heavy goods. Barges are widely used as a transportation medium in inland waterways or seaport areas</li>\n<li>In this section, we will be presenting the features for an Inland Carrier with the waterways transport on Abivin vRoute Web App</li>\n</ul>\n<figure><span aria-label=\"1500\" class=\"img lightbox closed\" role=\"button\" tabindex=\"0\"><span class=\"lightbox-inner\"><img alt=\"1500\" class=\"img img-align-center border\" height=\"auto\" loading=\"lazy\" src=\"../assets_user_guide/8c1fbf8-barge_services_freight_logistics.jpg\" title=\"barge services freight logistics.jpg\" width=\"auto\" style=\"max-width:100%; height:auto; max-width:100%; height:auto; max-width:100%; height:auto;\"/><figcaption><p>Image of an industrial barge carrying containers, towed by a tugboat</p></figcaption></span></span></figure></div><div class=\"UpdatedAt\"><p class=\"DateLine\"><i class=\"icon icon-watch\"></i>Updated<!-- --> <!-- -->about 1 month ago<!-- --> </p></div><hr class=\"NextStepsDivider\"/></section><section class=\"content-toc grid-25\"></section></div><div class=\"ModalWrapper\" id=\"tutorialmodal-root\"></div></article></div></main>",
+  "html_content": "<main class=\"SuperHubDoc3Z-1XSVTg-Q1 rm-Guides\" id=\"content\"><div class=\"SuperHubDoc-container2RY1FPE4Ewze rm-Container rm-Container_flex\"><article class=\"SuperHubDoc-article3ArTrEavUTKg rm-Article rm-Guides-SuperHub\"><div class=\"grid-container-fluid\" id=\"content-container\"><section class=\"content-body grid-75\"><div class=\"rm-Markdown markdown-body rm-Markdown markdown-body ng-non-bindable\" data-testid=\"RDMD\" style=\"margin-left:31px\"><ul>\n<li>A barge is a flat-bottomed ship, built mainly for river and canal transport of heavy goods. Barges are widely used as a transportation medium in inland waterways or seaport areas</li>\n<li>In this section, we will be presenting the features for an Inland Carrier with the waterways transport on Abivin vRoute Web App</li>\n</ul>\n<figure><span aria-label=\"1500\" class=\"img lightbox closed\" role=\"button\" tabindex=\"0\"><span class=\"lightbox-inner\"><img alt=\"1500\" class=\"img img-align-center border\" height=\"auto\" loading=\"lazy\" src=\"https://files.readme.io/8c1fbf8-barge_services_freight_logistics.jpg\" title=\"barge services freight logistics.jpg\" width=\"auto\"/><figcaption><p>Image of an industrial barge carrying containers, towed by a tugboat</p></figcaption></span></span></figure></div><div class=\"UpdatedAt\"><p class=\"DateLine\"><i class=\"icon icon-watch\"></i>Updated<!-- --> <!-- -->about 1 month ago<!-- --> </p></div><hr class=\"NextStepsDivider\"/></section><section class=\"content-toc grid-25\"></section></div><div class=\"ModalWrapper\" id=\"tutorialmodal-root\"></div></article></div></main>",
   "tags": [],
   "lang": "en",
   "status": "ready",
-  "updated_at": "2025-10-27T03:46:51Z",
+  "updated_at": "2025-11-03T02:44:03Z",
   "scraped": true,
   "_readme_category": "docs"
 }

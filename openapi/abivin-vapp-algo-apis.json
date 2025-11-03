@@ -1,1 +1,555 @@
-﻿{ openapi:3.0.0, info: {title:Abivin vApp-Algo APIs,version:3.0.0} }
+﻿{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Abivin vApp-Algo APIs",
+    "version": "3.0.0",
+    "description": "All APIs described with apidoc tags in code"
+  },
+  "paths": {
+    "/ml/service_time/train": {
+      "post": {
+        "tags": [
+          "Service_time"
+        ],
+        "summary": "Train service time of each driver at each store, based on the historical data ",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "items": {
+                    "$ref": "#/components/schemas/Ml_Servicetime_TrainResponseData"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ml_Servicetime_TrainRequestData"
+              }
+            }
+          },
+          "description": "Train service time of each driver at each store, based on the historical data ",
+          "required": true
+        }
+      }
+    },
+    "/ml/service_time/predict": {
+      "post": {
+        "tags": [
+          "Service_time"
+        ],
+        "summary": "Predict service time, after calling training service time model ",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "items": {
+                    "$ref": "#/components/schemas/Ml_servicetime_predictResponseData"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ml_servicetime_predictRequestData"
+              }
+            }
+          },
+          "description": "Predict service time, after calling training service time model ",
+          "required": true
+        }
+      }
+    },
+    "/ml/sorting_time/train": {
+      "post": {
+        "tags": [
+          "Sorting_time"
+        ],
+        "summary": "Train sorting time of each driver at the beginning of the day, based on the historical data ",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "items": {
+                    "$ref": "#/components/schemas/Ml_Sortingtime_TrainResponseData"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ml_Sortingtime_TrainRequestData"
+              }
+            }
+          },
+          "description": "Train sorting time of each driver at the beginning of the day, based on the historical data ",
+          "required": true
+        }
+      }
+    },
+    "/ml/sorting_time/predict": {
+      "post": {
+        "tags": [
+          "Sorting_time"
+        ],
+        "summary": "Predict sorting time, after calling training Sorting time model ",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "number",
+                  "items": {
+                    "$ref": "#/components/schemas/Ml_sortingtime_predictResponseData"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Ml_sortingtime_predictRequestData"
+              }
+            }
+          },
+          "description": "Predict sorting time, after calling training Sorting time model ",
+          "required": true
+        }
+      }
+    },
+    "/traffic": {
+      "post": {
+        "tags": [
+          "Traffic"
+        ],
+        "summary": "Show speed of vehicle at given day of week or given hour of day ",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "items": {
+                    "$ref": "#/components/schemas/TrafficResponseData"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrafficRequestData"
+              }
+            }
+          },
+          "description": "Show speed of vehicle at given day of week or given hour of day ",
+          "required": true
+        }
+      }
+    },
+    "/trafficunittest": {
+      "post": {
+        "tags": [
+          "Traffic"
+        ],
+        "summary": "Show speed of vehicle at given day of week or given hour of day ",
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "items": {
+                    "$ref": "#/components/schemas/TrafficunittestResponseData"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TrafficunittestRequestData"
+              }
+            }
+          },
+          "description": "Show speed of vehicle at given day of week or given hour of day ",
+          "required": true
+        }
+      }
+    },
+    "/run_algo": {
+      "post": {
+        "tags": [
+          "Vehicle_Route_Optimization"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "items": {
+                    "$ref": "#/components/schemas/RunalgoResponseData"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RunalgoRequestData"
+              }
+            }
+          },
+          "required": true
+        }
+      }
+    },
+    "/stop_algo": {
+      "post": {
+        "tags": [
+          "Vehicle_Route_Optimization"
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "items": {
+                    "$ref": "#/components/schemas/StopalgoResponseData"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StopalgoRequestData"
+              }
+            }
+          },
+          "required": true
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "//valgo-dev.abivin.vn/"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Ml_Servicetime_TrainRequestData": {
+        "properties": {
+          "branch_ID": {
+            "type": "string",
+            "description": "ID of branch "
+          },
+          "distributor_ID": {
+            "type": "string",
+            "description": "ID of distributor "
+          }
+        },
+        "type": "object"
+      },
+      "Ml_Servicetime_TrainResponseData": {
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status of the service time training "
+          }
+        },
+        "type": "object"
+      },
+      "Ml_servicetime_predictRequestData": {
+        "properties": {
+          "distributor_ID": {
+            "type": "string",
+            "description": "ID of distributor "
+          },
+          "branch_ID": {
+            "type": "string",
+            "description": "ID of branch "
+          },
+          "store_ID": {
+            "type": "number",
+            "description": "ID of store to delivered "
+          },
+          "weight": {
+            "type": "number",
+            "description": "Total weight of all orders "
+          },
+          "volume": {
+            "type": "number",
+            "description": "Total volume of all orders "
+          }
+        },
+        "type": "object"
+      },
+      "Ml_servicetime_predictResponseData": {
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "Value of the service time prediction "
+          }
+        },
+        "type": "object"
+      },
+      "Ml_Sortingtime_TrainRequestData": {
+        "properties": {
+          "branch_ID": {
+            "type": "string",
+            "description": "ID of branch "
+          },
+          "distributor_ID": {
+            "type": "string",
+            "description": "ID of distributor "
+          }
+        },
+        "type": "object"
+      },
+      "Ml_Sortingtime_TrainResponseData": {
+        "properties": {
+          "data": {
+            "type": "string",
+            "description": "Result "
+          }
+        },
+        "type": "object"
+      },
+      "Ml_sortingtime_predictRequestData": {
+        "properties": {
+          "order": {
+            "type": "number",
+            "description": "Number of orders to delivered "
+          },
+          "weight": {
+            "type": "number",
+            "description": "Total weight of all orders "
+          },
+          "volume": {
+            "type": "number",
+            "description": "Total volume of all orders "
+          }
+        },
+        "type": "object"
+      },
+      "Ml_sortingtime_predictResponseData": {
+        "properties": {
+          "time": {
+            "type": "number",
+            "description": "Predicted time taken to sort items "
+          }
+        },
+        "type": "object"
+      },
+      "TrafficRequestData": {
+        "properties": {
+          "day_of_week": {
+            "type": "string",
+            "description": "day of week "
+          },
+          "hour_of_day": {
+            "type": "string",
+            "description": "hour of day "
+          },
+          "precision": {
+            "type": "number",
+            "description": "precision of geohash "
+          },
+          "from_date": {
+            "type": "object",
+            "description": "date to collect data for statistic "
+          },
+          "to_date": {
+            "type": "object",
+            "description": "date to collect data for statistic "
+          },
+          "use_day_of_week": {
+            "type": "boolean",
+            "description": "whether calculate for day of week "
+          },
+          "use_hour_of_day": {
+            "type": "boolean",
+            "description": "whether calculate for hour of day "
+          }
+        },
+        "type": "object"
+      },
+      "TrafficResponseData": {
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "average speed at geohash point "
+          }
+        },
+        "type": "object"
+      },
+      "TrafficunittestRequestData": {
+        "properties": {
+          "day_of_week": {
+            "type": "string",
+            "description": "day of week "
+          },
+          "hour_of_day": {
+            "type": "string",
+            "description": "hour of day "
+          },
+          "precision": {
+            "type": "number",
+            "description": "precision of geohash "
+          },
+          "from_date": {
+            "type": "object",
+            "description": "date to collect data for statistic "
+          },
+          "to_date": {
+            "type": "object",
+            "description": "date to collect data for statistic "
+          },
+          "use_day_of_week": {
+            "type": "boolean",
+            "description": "whether calculate for day of week "
+          },
+          "use_hour_of_day": {
+            "type": "boolean",
+            "description": "whether calculate for hour of day "
+          }
+        },
+        "type": "object"
+      },
+      "TrafficunittestResponseData": {
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "average speed at geohash point "
+          }
+        },
+        "type": "object"
+      },
+      "RunalgoRequestData": {
+        "properties": {
+          "distributor_id": {
+            "type": "string",
+            "description": "ID of distributor "
+          },
+          "branchId": {
+            "type": "string",
+            "description": "ID of branch "
+          },
+          "algoMode": {
+            "type": "string",
+            "description": "TODO "
+          },
+          "deliverBy": {
+            "type": "string",
+            "description": "TODO "
+          },
+          "skipOptimisation": {
+            "type": "string",
+            "description": "TODO "
+          },
+          "limitBikeDistance": {
+            "type": "string",
+            "description": "Limit distance to be run by one deliverer "
+          },
+          "limitBikeDistanceSegment": {
+            "type": "string",
+            "description": "Limit distance to be run by one segment "
+          },
+          "limitBikeXdock": {
+            "type": "string",
+            "description": "TODO "
+          },
+          "limitWaitTime": {
+            "type": "string",
+            "description": "TODO "
+          }
+        },
+        "type": "object"
+      },
+      "RunalgoResponseData": {
+        "properties": {
+          "distributor_ID": {
+            "type": "string",
+            "description": "ID of distributor "
+          }
+        },
+        "type": "object"
+      },
+      "StopalgoRequestData": {
+        "properties": {
+          "branchId": {
+            "type": "string",
+            "description": "ID of branch "
+          },
+          "distributorId": {
+            "type": "string",
+            "description": "ID of distributor "
+          },
+          "processkey": {
+            "type": "string",
+            "description": "Key of the runnign process (= distributorId + branchId) "
+          }
+        },
+        "type": "object"
+      },
+      "StopalgoResponseData": {
+        "properties": {
+          "data": {
+            "type": "string",
+            "description": "Result "
+          }
+        },
+        "type": "object"
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}

@@ -25,7 +25,7 @@ ODOO_DB_NAME = "test018"
 ODOO_USER = "trinhcongduc0112@gmail.com"
 ODOO_API_KEY = "3f623d85508792f81af911610db742d67a5d1845"
 
-SPACE_NAME = "Tài liệu Abivin"
+SPACE_NAME = "Tài liệu Abivin 01"
 MODEL_ARTICLE = "knowledge.article"
 MODEL_ATTACHMENT = "ir.attachment"
 LOCAL_ASSET_REF = "../assets_"
@@ -177,22 +177,23 @@ def load_sorted_docs():
             except Exception as e:
                 print(f"  ⚠️  Bỏ qua file lỗi '{jp}': {e}")
 
-    # Sắp xếp theo order_index (mặc định lớn nếu thiếu), sau đó theo title để ổn định
+    # Sắp xếp: section -> order_index -> title (để đảm bảo thứ tự đúng)
     def sort_key(tup):
         _slug, _doc, _ = tup
-        return (
-            _doc.get("order_index", 999999),
-            (_doc.get("title") or _slug).lower()
-        )
+        section = _doc.get("section", "unknown")
+        order_idx = _doc.get("order_index", 999999)
+        title = (_doc.get("title") or _slug).lower()
+        return (section, order_idx, title)
 
     items.sort(key=sort_key)
 
-    # Gán id_seq chạy suốt danh sách nếu file chưa có
+    # Sau khi sắp xếp xong, gán lại _id_seq tuần tự theo thứ tự đã sắp xếp
+    # Điều này đảm bảo _id_seq phản ánh đúng thứ tự hiển thị cuối cùng
     next_seq = 1
     for i, (slug, doc, assets_dir) in enumerate(items, start=1):
-        if not doc.get("_id_seq"):
-            doc["_id_seq"] = next_seq
-            next_seq += 1
+        # Luôn gán lại _id_seq theo thứ tự đã sắp xếp
+        doc["_id_seq"] = next_seq
+        next_seq += 1
 
     return items
 

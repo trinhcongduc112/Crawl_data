@@ -1,0 +1,25 @@
+{
+  "origin_url": "https://docs.abivin.com/reference/POST /ml/service_time/predict",
+  "origin_host": "docs.abivin.com",
+  "collection": "abivin-docs",
+  "section": "developer_guide",
+  "parents_segments": [
+    "reference"
+  ],
+  "parent_slug": "reference",
+  "order_index": 2,
+  "_id_seq": 2,
+  "old_slug": "reference__post_ml__service_time__predict",
+  "new_slug": "reference__post_ml__service_time__predict",
+  "title": "Predict service time, after calling training service time model ",
+  "html_content": "<h1>Predict service time, after calling training service time model </h1><p><strong>Method:</strong> <code>POST</code></p><p><strong>Path:</strong> <code>/ml/service_time/predict</code></p><p><strong>Tags:</strong> <code>Service_time</code></p><h3>Request Body</h3><p>Schema reference: <code>#/components/schemas/Ml_servicetime_predictRequestData</code></p><h3>Responses</h3><h4>HTTP 200</h4><p>successful operation</p>",
+  "tags": [
+    "Service_time"
+  ],
+  "lang": "en",
+  "status": "ready",
+  "updated_at": "2025-11-03T05:03:06Z",
+  "scraped": false,
+  "_readme_category": "reference",
+  "_openapi_source": "abivin-vapp-algo-apis.json"
+}

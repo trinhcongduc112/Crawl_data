@@ -1,1 +1,299 @@
-﻿{  openapi:3.0.3, info: {title:ABIVIN Integration API Docs,version:0.0.1} }
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "ABIVIN Integration API Docs",
+    "description": "Some useful links:\n- [The Pet Store repository](https://github.com/swagger-api/swagger-petstore)\n- [The source API definition for the Pet Store](https://github.com/swagger-api/swagger-petstore/blob/master/src/main/resources/openapi.yaml)",
+    "version": "0.0.1"
+  },
+  "servers": [
+    {
+      "url": "https://vapp.abivin.com/integration/push-data"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Data",
+      "description": "All information needed to create a route plan"
+    }
+  ],
+  "paths": {
+    "/push-data": {
+      "post": {
+        "tags": [
+          "Data"
+        ],
+        "summary": "Push data to Abivin's system",
+        "description": "Push data to Abivin's system",
+        "requestBody": {
+          "description": "Request to Abivin's system, include information of Products, Orders, Customers",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Data"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Data": {
+        "required": [
+          "deliverDate",
+          "orderCode",
+          "customerCode",
+          "customerName",
+          "address",
+          "phoneNumber",
+          "allowVehicleType",
+          "productCode",
+          "numberOfCase",
+          "number of Item",
+          "totalPrice",
+          "minUnloadTime",
+          "maxUnloadTime",
+          "parentCode",
+          "timeWindow",
+          "saleOrderId",
+          "rowId",
+          "deliveryOrderId",
+          "depotId",
+          "subDepotId",
+          "branchId",
+          "debt",
+          "category",
+          "productWeight",
+          "productVolume",
+          "productLength",
+          "productWidth",
+          "productHeight"
+        ],
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/DataDetail"
+        }
+      },
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32",
+            "example": 0,
+            "enum": [
+              200,
+              400,
+              401,
+              500
+            ]
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "DataDetail": {
+        "type": "object",
+        "properties": {
+          "deliverDate": {
+            "type": "string",
+            "example": "01/12/2022",
+            "description": "Format: \"DD/MM/YYYY\""
+          },
+          "orderCode": {
+            "type": "string",
+            "example": "SO118"
+          },
+          "customerCode": {
+            "type": "string",
+            "example": "HN850.1"
+          },
+          "customerName": {
+            "type": "string",
+            "example": "manh nguyen"
+          },
+          "address": {
+            "type": "string",
+            "example": "150 Phó đức chính, Tây hồ, Hà nội"
+          },
+          "phoneNumber": {
+            "type": "string",
+            "example": "0123456789"
+          },
+          "allowVehicleType": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "TRUCK8H",
+              "VAN"
+            ]
+          },
+          "productCode": {
+            "type": "string",
+            "example": "WH750AP"
+          },
+          "productName": {
+            "type": "string",
+            "example": "Màn hình TV"
+          },
+          "numberOfCase": {
+            "type": "number",
+            "format": "integer",
+            "example": 10
+          },
+          "numberOfItem": {
+            "type": "number",
+            "format": "integer",
+            "example": 11
+          },
+          "totalPrice": {
+            "type": "string",
+            "example": "15000000"
+          },
+          "minUnloadTime": {
+            "type": "number",
+            "format": "integer",
+            "default": 20
+          },
+          "maxUnloadTime": {
+            "type": "number",
+            "format": "integer",
+            "default": 99
+          },
+          "parentCode": {
+            "type": "string",
+            "example": "HN850"
+          },
+          "timeWindow": {
+            "type": "string",
+            "description": "Format: \"hh:mm-hh:mm\"",
+            "default": "00:00-23:59"
+          },
+          "saleOrderId": {
+            "type": "string",
+            "description": "Hidden field for each Sale order",
+            "example": "2h456k32hj5kj324l2"
+          },
+          "rowId": {
+            "type": "string",
+            "description": "Hidden field for each product line",
+            "example": "2h456k32hj5kj324l2"
+          },
+          "deliveryOrderId": {
+            "type": "string",
+            "description": "Hidden field for each Delivery order",
+            "example": "2h456k32hj5kj324l2"
+          },
+          "depotId": {
+            "type": "string",
+            "description": "Depot Id, use default value",
+            "default": "KHOHN"
+          },
+          "subDepotId": {
+            "type": "string",
+            "example": "kho lay hang 1"
+          },
+          "branchId": {
+            "type": "string",
+            "description": "branch Id, use default value",
+            "default": "CNHN"
+          },
+          "debt": {
+            "type": "string",
+            "example": "4000000"
+          },
+          "category": {
+            "type": "string",
+            "example": "C123"
+          },
+          "productWeight": {
+            "type": "number",
+            "format": "float",
+            "description": "Unit: kg",
+            "example": 12,
+            "default": 0
+          },
+          "productVolume": {
+            "type": "number",
+            "format": "float",
+            "description": "Unit: m3",
+            "example": 0.5
+          },
+          "productLength": {
+            "type": "number",
+            "format": "float",
+            "example": 0.8
+          },
+          "productWidth": {
+            "type": "number",
+            "format": "float",
+            "example": 0.6
+          },
+          "productHeight": {
+            "type": "number",
+            "format": "float",
+            "example": 0.7
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "x-api-key",
+        "in": "header"
+      }
+    }
+  },
+  "x-readme": {
+    "explorer-enabled": true,
+    "proxy-enabled": true
+  }
+}
