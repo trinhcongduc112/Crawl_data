@@ -25,7 +25,7 @@ ODOO_DB_NAME = "test018"
 ODOO_USER = "trinhcongduc0112@gmail.com"
 ODOO_API_KEY = "3f623d85508792f81af911610db742d67a5d1845"
 
-SPACE_NAME = "Tài liệu Abivin 01"
+SPACE_NAME = "Tài liệu Abivin 02"
 MODEL_ARTICLE = "knowledge.article"
 MODEL_ATTACHMENT = "ir.attachment"
 LOCAL_ASSET_REF = "../assets_"
@@ -177,23 +177,30 @@ def load_sorted_docs():
             except Exception as e:
                 print(f"  ⚠️  Bỏ qua file lỗi '{jp}': {e}")
 
-    # Sắp xếp: section -> order_index -> title (để đảm bảo thứ tự đúng)
+    # Sắp xếp theo ưu tiên section cố định, sau đó order_index -> title
+    section_priority = {
+        "user_guide": 0,
+        "developer_guide": 1,
+        "release_notes": 2,
+    }
     def sort_key(tup):
         _slug, _doc, _ = tup
         section = _doc.get("section", "unknown")
         order_idx = _doc.get("order_index", 999999)
         title = (_doc.get("title") or _slug).lower()
-        return (section, order_idx, title)
+        pri = section_priority.get(section, 10)
+        return (pri, order_idx, title)
 
     items.sort(key=sort_key)
 
-    # Sau khi sắp xếp xong, gán lại _id_seq tuần tự theo thứ tự đã sắp xếp
-    # Điều này đảm bảo _id_seq phản ánh đúng thứ tự hiển thị cuối cùng
-    next_seq = 1
-    for i, (slug, doc, assets_dir) in enumerate(items, start=1):
-        # Luôn gán lại _id_seq theo thứ tự đã sắp xếp
-        doc["_id_seq"] = next_seq
-        next_seq += 1
+    # Sau khi sắp xếp xong, gán lại _id_seq THEO TỪNG NHÓM CHA (parent_slug)
+    # để đảm bảo thứ tự hiển thị trong mỗi nhóm giống sidebar
+    parent_to_next_seq: Dict[str, int] = {}
+    for slug, doc, assets_dir in items:
+        parent_key = doc.get("parent_slug") or "__root__"
+        seq = parent_to_next_seq.get(parent_key, 1)
+        doc["_id_seq"] = seq
+        parent_to_next_seq[parent_key] = seq + 1
 
     return items
 
@@ -261,7 +268,7 @@ def import_all():
                 "parent_id": space_id
             }
             # Thêm sequence nếu có _id_seq để Odoo sort đúng thứ tự
-            if id_seq:
+            if id_seq is not None:
                 vals["sequence"] = id_seq
 
             # Kiểm tra article đã tồn tại
