@@ -1,0 +1,7 @@
+- post_products-categories-create
+- post_products-categories-delete
+- post_products-categories-list
+- post_products-categories-listbycode
+- post_products-categories-read
+- post_products-categories-update
+- post_products-categories-upload

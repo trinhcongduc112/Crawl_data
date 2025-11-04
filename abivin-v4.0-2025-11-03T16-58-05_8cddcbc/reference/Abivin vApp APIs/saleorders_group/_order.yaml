@@ -1,0 +1,9 @@
+- post_orders-change-status
+- post_orders-create
+- post_orders-delete
+- post_orders-list
+- post_orders-read
+- post_orders-update
+- post_orders-upload
+- post_orders-assigntransporter
+- post_orders-getinfocreatepurchaseorder

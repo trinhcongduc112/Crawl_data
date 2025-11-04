@@ -1,0 +1,5 @@
+- post_auth-change-pwd
+- post_auth-forgot
+- post_auth-signin
+- post_auth-signout
+- post_auth-signup

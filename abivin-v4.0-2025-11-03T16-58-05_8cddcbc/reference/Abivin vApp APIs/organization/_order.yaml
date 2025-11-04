@@ -1,0 +1,8 @@
+- post_organizations-category-organizationcategories
+- post_organizations-create
+- post_organizations-delete
+- post_organizations-list
+- post_organizations-read
+- post_organizations-update
+- post_organizations-upload
+- post_organizations-read-categories

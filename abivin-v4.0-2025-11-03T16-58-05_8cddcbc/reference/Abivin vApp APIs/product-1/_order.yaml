@@ -1,0 +1,8 @@
+- post_products-create
+- post_products-delete
+- post_products-list
+- post_products-listbycode
+- post_products-read
+- post_products-update
+- post_products-upload
+- post_products-uploadserialcodes

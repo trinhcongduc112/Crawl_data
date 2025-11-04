@@ -1,0 +1,8 @@
+- post_tasks-actions-create
+- post_tasks-actions-delete
+- post_tasks-actions-filter
+- post_tasks-actions-list
+- post_tasks-actions-read
+- post_tasks-actions-startable
+- post_tasks-actions-update
+- post_tasks-actions-upload

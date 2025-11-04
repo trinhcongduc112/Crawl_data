@@ -1,0 +1,7 @@
+- post_auth-forgot-1
+- post_auth-remove
+- post_auth-reset-token
+- post_auth-signin-1
+- post_auth-signup-1
+- post_users-password
+- post_users-resetpassword

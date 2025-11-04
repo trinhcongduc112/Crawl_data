@@ -1,0 +1,8 @@
+- post_customers-create
+- post_customers-upload
+- post_customers-delete
+- post_customers-list
+- post_customers-read
+- post_customers-tasktimeline
+- post_customers-update
+- post_customers-uploadall

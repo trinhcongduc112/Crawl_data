@@ -1,0 +1,7 @@
+- post_roles-check-configurations
+- post_roles-create
+- post_roles-delete
+- post_roles-group-users
+- post_roles-list
+- post_roles-read
+- post_roles-update

@@ -1,0 +1,5 @@
+- post_customers-group-create
+- post_customers-group-delete
+- post_customers-group-list
+- post_customers-group-read
+- post_customers-group-update

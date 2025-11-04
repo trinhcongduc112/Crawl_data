@@ -1,0 +1,6 @@
+- post_survey-create
+- post_survey-delete
+- post_survey-draft
+- post_survey-list
+- post_survey-read
+- post_survey-update

@@ -1,0 +1,7 @@
+- post_tasks-create
+- post_tasks-delete
+- post_tasks-generateotp
+- post_tasks-list
+- post_tasks-read
+- post_tasks-submit
+- post_tasks-update
