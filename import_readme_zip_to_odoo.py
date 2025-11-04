@@ -1,6 +1,6 @@
 # =============================================================
-# File: import_readme_zip_to_odoo.py (Odoo 19, ready-to-run)
-# Import ReadMe ZIP export -> Odoo Knowledge (mirror images)
+# File: import_readme_zip_to_odoo.py (Odoo 19, final VI)
+# Import ReadMe ZIP export -> Odoo Knowledge (mirror ảnh, fallback Space)
 # =============================================================
 
 import os
@@ -10,37 +10,33 @@ import json
 import base64
 import markdown
 import sys
+import argparse
 import xmlrpc.client
 from pathlib import Path
 from typing import Dict, List, Tuple, Any, Optional
 
-# Fix encoding for Windows console
+# Fix encoding cho Windows console
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
-# ===================== CẤU HÌNH =====================
+# ===================== CẤU HÌNH MẶC ĐỊNH =====================
 README_EXPORT_DIR = r"C:\Abivin\data_docs03\abivin-v4.0-2025-11-03T16-58-05_8cddcbc"
 ODOO_BASE_URL = "https://test018.odoo.com"
 ODOO_DB_NAME = "test018"
 ODOO_USER = "trinhcongduc0112@gmail.com"
-ODOO_API_KEY = "3f623d85508792f81af911610db742d67a5d1845"
-SPACE_NAME = "Tài liệu Abivin 01"
+ODOO_API_KEY = "3f623d85508792f81af911610db742d67a5d1845"  # <-- điền API key
+SPACE_NAME = "Tài liệu Abivin 04"
+
 MODEL_ARTICLE = "knowledge.article"
 MODEL_ATTACHMENT = "ir.attachment"
-MODEL_SPACE = None  # auto-detect for Odoo 19
-# ====================================================
 
+# Tự phát hiện Space
+SPACE_FIELD = None           # 'space_id' | 'collection_id' | 'workspace_id' | None
+SPACE_MODEL_NAME = None      # model phía sau m2o (chỉ để log)
+# =============================================================
+
+# Cache upload ảnh để tránh trùng
 IMAGE_UPLOAD_CACHE: Dict[str, str] = {}
-
-# ---------------- ATTACHMENT UTILS -------------------
-def guess_mimetype(name: str) -> str:
-    ext = os.path.splitext(name.lower())[1]
-    return {
-        ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg",
-        ".gif": "image/gif", ".svg": "image/svg+xml", ".webp": "image/webp",
-        ".avif": "image/avif"
-    }.get(ext, "application/octet-stream")
-
 
 # ---------------- XML-RPC CORE ----------------------
 def odoo_login() -> Tuple[xmlrpc.client.ServerProxy, int]:
@@ -50,11 +46,11 @@ def odoo_login() -> Tuple[xmlrpc.client.ServerProxy, int]:
         version_info = common.version()
         print(f"  ✓ Server version: {version_info.get('server_version', 'Unknown')}")
     except Exception as e:
-        print(f"  ✗ Lỗi check version: {e}")
+        print(f"  ✗ Lỗi kiểm tra phiên bản: {e}")
 
     uid = common.authenticate(ODOO_DB_NAME, ODOO_USER, ODOO_API_KEY, {})
     if not uid:
-        raise SystemExit("❌ Auth Odoo fail. Kiểm tra API key/quyền.")
+        raise SystemExit("❌ Xác thực Odoo thất bại. Kiểm tra API key/quyền.")
     print(f"  ✓ Đăng nhập ID: {uid}")
     return xmlrpc.client.ServerProxy(f"{ODOO_BASE_URL}/xmlrpc/2/object"), uid
 
@@ -64,7 +60,10 @@ def odoo_call(models, uid, model, method, *args, **kwargs):
     kwargs = kwargs or {}
     for attempt in range(3):
         try:
-            return models.execute_kw(ODOO_DB_NAME, uid, ODOO_API_KEY, model, method, args, kwargs)
+            return models.execute_kw(
+                ODOO_DB_NAME, uid, ODOO_API_KEY,
+                model, method, args, kwargs
+            )
         except Exception as e:
             print(f"  [RPC ERROR] {model}.{method} attempt {attempt+1}/3: {e}")
             import time; time.sleep(2)
@@ -91,30 +90,14 @@ def odoo_write(models, uid, model, ids, vals):
         raise TypeError("write() expects dict")
     return odoo_call(models, uid, model, "write", ids, vals)
 
-
-# ---------------- HELPERS -------------------
-def _detect_space_model(models, uid):
-    global MODEL_SPACE
-    if MODEL_SPACE: return MODEL_SPACE
-    candidates = ['knowledge.space', 'knowledge.collection']
-    res = odoo_search(models, uid, 'ir.model', [('model','in',candidates)], ['model'])
-    found = {r['model'] for r in res}
-    for m in candidates:
-        if m in found:
-            MODEL_SPACE = m
-            return MODEL_SPACE
-    raise RuntimeError("Không tìm thấy model Space (knowledge.space/knowledge.collection).")
-
-
-def ensure_space(models, uid, space_name: str) -> int:
-    space_model = _detect_space_model(models, uid)
-    rec = odoo_search(models, uid, space_model, [("name","=",space_name)], ["id"], limit=1)
-    if rec:
-        print(f"  ✓ Dùng Space '{space_name}' (ID {rec[0]['id']})")
-        return rec[0]['id']
-    sid = odoo_create(models, uid, space_model, {"name": space_name})
-    print(f"  ✓ Tạo Space '{space_name}' (ID {sid})")
-    return sid
+# ---------------- ATTACHMENT UTILS -------------------
+def guess_mimetype(name: str) -> str:
+    ext = os.path.splitext(name.lower())[1]
+    return {
+        ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg",
+        ".gif": "image/gif", ".svg": "image/svg+xml", ".webp": "image/webp",
+        ".avif": "image/avif"
+    }.get(ext, "application/octet-stream")
 
 
 def upload_attachment(models, uid, path: str, public=True) -> Tuple[Optional[int], Optional[str]]:
@@ -135,7 +118,54 @@ def upload_attachment(models, uid, path: str, public=True) -> Tuple[Optional[int
         print(f"  ✗ Lỗi upload ảnh '{path}': {e}")
         return None, None
 
+# ---------------- SPACE/FALLBACK ---------------------
+def detect_space_field(models, uid):
+    """Phát hiện article có field 'space-like' không."""
+    global SPACE_FIELD, SPACE_MODEL_NAME
+    if SPACE_FIELD is not None:
+        return SPACE_FIELD, SPACE_MODEL_NAME
 
+    fields = odoo_call(models, uid, MODEL_ARTICLE, "fields_get", [], {"attributes": ["string", "type", "relation"]})
+    candidates = ["space_id", "collection_id", "workspace_id"]
+    for f in candidates:
+        if f in fields and fields[f].get("type") == "many2one":
+            SPACE_FIELD = f
+            SPACE_MODEL_NAME = fields[f].get("relation")
+            print(f"  ✓ Phát hiện field Space: {SPACE_FIELD} -> {SPACE_MODEL_NAME}")
+            return SPACE_FIELD, SPACE_MODEL_NAME
+
+    SPACE_FIELD, SPACE_MODEL_NAME = None, None
+    print("  • Không có field Space trên knowledge.article. Sẽ dùng 1 bài gốc làm 'Space giả'.")
+    return None, None
+
+
+def ensure_space(models, uid, space_name: str) -> int:
+    """Nếu có Space thật -> trả về id Space. Nếu không -> trả về id Article gốc (root) làm 'Space giả'."""
+    space_field, space_model = detect_space_field(models, uid)
+
+    if space_field and space_model:
+        rec = odoo_search(models, uid, space_model, [("name","=",space_name)], ["id"], limit=1)
+        if rec:
+            print(f"  ✓ Dùng {space_model} '{space_name}' (ID {rec[0]['id']})")
+            return rec[0]["id"]
+        sid = odoo_create(models, uid, space_model, {"name": space_name})
+        print(f"  ✓ Tạo {space_model} '{space_name}' (ID {sid})")
+        return sid
+
+    # Fallback: tạo article gốc
+    rec = odoo_search(models, uid, MODEL_ARTICLE, [("name","=",space_name), ("parent_id","=",False)], ["id"], limit=1)
+    if rec:
+        print(f"  ✓ Dùng bài gốc làm 'Space': '{space_name}' (ID {rec[0]['id']})")
+        return rec[0]["id"]
+    aid = odoo_create(models, uid, MODEL_ARTICLE, {
+        "name": space_name,
+        "body": "<p>Root node cho tài liệu import</p>",
+        "parent_id": False,
+    })
+    print(f"  ✓ Tạo bài gốc làm 'Space': '{space_name}' (ID {aid})")
+    return aid
+
+# ---------------- PARSE MARKDOWN/OPENAPI -------------
 def read_order_yaml(order_path: Path) -> List[str]:
     if not order_path.exists(): return []
     try:
@@ -178,7 +208,6 @@ def parse_openapi_endpoint(openapi_spec: dict, operation_id: str, title: str = N
                 if path_pattern in path or path == path_pattern:
                     if method_pattern in methods:
                         found_endpoint, found_path, found_method = methods[method_pattern], path, method_pattern; break
-            # fallthrough
     if not found_endpoint and title:
         title_path = title.strip()
         if title_path.startswith('/'):
@@ -253,7 +282,7 @@ def parse_markdown_file(md_path: Path, base_dir: Path = None) -> Optional[Dict[s
                             if html and html != "<p>API endpoint documentation not found in OpenAPI spec.</p>":
                                 return {'title': title, 'html_content': html, 'front_matter': front_matter, 'slug': md_path.stem}
                         except Exception as e:
-                            print(f"    ⚠️  OpenAPI parse lỗi {api_file}: {e}")
+                            print(f"    ⚠️  Lỗi parse OpenAPI {api_file}: {e}")
 
         if body:
             md = markdown.Markdown(extensions=['fenced_code','tables','nl2br'])
@@ -266,7 +295,7 @@ def parse_markdown_file(md_path: Path, base_dir: Path = None) -> Optional[Dict[s
         print(f"  ⚠️  Lỗi parse {md_path}: {e}")
         return None
 
-
+# ---------------- DỰNG CÂY DOC ----------------------
 def build_doc_tree(base_dir: Path) -> List[Dict[str, Any]]:
     all_docs = []
     file_counter = {'user_guide':0, 'developer_guide':0, 'release_notes':0}
@@ -317,24 +346,24 @@ def build_doc_tree(base_dir: Path) -> List[Dict[str, Any]]:
                     all_docs.append(doc_data); processed.add(md_file)
 
     docs_dir = base_dir / 'docs'
-    if docs_dir.exists(): print("  📂 docs/..."); process_directory_recursive(docs_dir, 'user-guide', 'user_guide', docs_dir, base_dir)
+    if docs_dir.exists(): print("  📂 Đọc docs/..."); process_directory_recursive(docs_dir, 'user-guide', 'user_guide', docs_dir, base_dir)
     reference_dir = base_dir / 'reference'
-    if reference_dir.exists(): print("  📂 reference/..."); process_directory_recursive(reference_dir, 'developer-guide', 'developer_guide', reference_dir, base_dir)
+    if reference_dir.exists(): print("  📂 Đọc reference/..."); process_directory_recursive(reference_dir, 'developer-guide', 'developer_guide', reference_dir, base_dir)
     recipes_dir = base_dir / 'recipes'
-    if recipes_dir.exists(): print("  📂 recipes/..."); process_directory_recursive(recipes_dir, 'release-notes', 'release_notes', recipes_dir, base_dir)
+    if recipes_dir.exists(): print("  📂 Đọc recipes/..."); process_directory_recursive(recipes_dir, 'release-notes', 'release_notes', recipes_dir, base_dir)
 
     parent_order = 1
     if file_counter['user_guide']>0:
         all_docs.insert(0, {'title':'User Guide','html_content':'<p>Tài liệu hướng dẫn sử dụng</p>','section':'user_guide','order_index':parent_order,'parent_slug':None,'slug':'user-guide','is_parent':True}); parent_order+=1
     if file_counter['developer_guide']>0:
         insert_pos = 1 if file_counter['user_guide']>0 else 0
-        all_docs.insert(insert_pos, {'title':'Developer Guide','html_content':'<p>Tài liệu API & dev</p>','section':'developer_guide','order_index':parent_order,'parent_slug':None,'slug':'developer-guide','is_parent':True}); parent_order+=1
+        all_docs.insert(insert_pos, {'title':'Developer Guide','html_content':'<p>Tài liệu API & Dev</p>','section':'developer_guide','order_index':parent_order,'parent_slug':None,'slug':'developer-guide','is_parent':True}); parent_order+=1
     if file_counter['release_notes']>0:
         insert_pos = (1 if file_counter['user_guide']>0 else 0) + (1 if file_counter['developer_guide']>0 else 0)
         all_docs.insert(insert_pos, {'title':'Release Notes','html_content':'<p>Ghi chú phiên bản</p>','section':'release_notes','order_index':parent_order,'parent_slug':None,'slug':'release-notes','is_parent':True})
     return all_docs
 
-
+# ---------------- XỬ LÝ ẢNH -------------------------
 def replace_image_urls(models, uid, html: str, base_zip_dir: Path) -> str:
     if not html: return ""
 
@@ -418,8 +447,7 @@ def replace_image_urls(models, uid, html: str, base_zip_dir: Path) -> str:
 
     return html
 
-
-# ------------------- IMPORTER CHÍNH -------------------
+# ---------------- IMPORT CHÍNH -----------------------
 def import_all():
     models, uid = odoo_login()
     space_id = ensure_space(models, uid, SPACE_NAME)
@@ -469,27 +497,35 @@ def import_all():
             if total_files % 10 == 0 or doc.get('is_parent'):
                 print(f"\n[{total_files}] {title[:60]}")
 
-            vals = {"name": title, "body": html_content, "space_id": space_id, "parent_id": False}
+            # Domain tìm bài cũ (idempotent)
+            domain = [("name","=",title)]
+            if SPACE_FIELD:
+                domain.append((SPACE_FIELD,"=",space_id))
+                domain.append(("parent_id","=",False))
+            else:
+                domain.append(("parent_id","=",False))
+
+            # Vals tạo/cập nhật
+            vals = {"name": title, "body": html_content, "parent_id": False}
             if id_seq is not None: vals["sequence"] = id_seq
+            if SPACE_FIELD: vals[SPACE_FIELD] = space_id
 
-            existing = odoo_search(models, uid, MODEL_ARTICLE,
-                [("name","=",title), ("space_id","=",space_id), ("parent_id","=",False)], ["id"], limit=1)
-
+            existing = odoo_search(models, uid, MODEL_ARTICLE, domain, ["id"], limit=1)
             if existing:
                 rid = existing[0]["id"]
                 odoo_write(models, uid, MODEL_ARTICLE, [rid], vals)
                 article_ids[slug] = rid
-                print(f"  ✓ Update (ID: {rid})")
+                print(f"  ✓ Cập nhật (ID: {rid})")
             else:
                 aid = odoo_create(models, uid, MODEL_ARTICLE, vals)
                 article_ids[slug] = aid
-                print(f"  ✓ Create (ID: {aid})")
+                print(f"  ✓ Tạo mới (ID: {aid})")
 
             success_count += 1
         except Exception as e:
             print(f"\n❌ Lỗi '{doc.get('slug')}': {e}\n")
 
-    print("\n🔗 Set parent...")
+    print("\n🔗 Thiết lập quan hệ cha–con...")
     fixed = 0
     for doc in all_docs:
         parent_slug = doc.get('parent_slug')
@@ -499,7 +535,15 @@ def import_all():
         if child_id and parent_id:
             odoo_write(models, uid, MODEL_ARTICLE, [child_id], {"parent_id": parent_id})
             fixed += 1
-    if fixed: print(f"  ✓ Set parent cho {fixed} bài")
+    if fixed: print(f"  ✓ Đã set parent cho {fixed} bài")
+
+    # Nếu KHÔNG có Space field: đưa mọi bài top-level vào bài gốc (space_id)
+    if not SPACE_FIELD:
+        print("\n📁 Gom bài top-level vào dưới bài gốc (Space giả)...")
+        for slug, aid in article_ids.items():
+            rec = odoo_search(models, uid, MODEL_ARTICLE, [("id","=",aid)], ["parent_id"], limit=1)
+            if rec and not rec[0].get("parent_id"):
+                odoo_write(models, uid, MODEL_ARTICLE, [aid], {"parent_id": space_id})
 
     print("\n📊 Cập nhật sequence...")
     seq_updated = 0
@@ -508,18 +552,33 @@ def import_all():
         if aid and doc.get('_id_seq') is not None:
             odoo_write(models, uid, MODEL_ARTICLE, [aid], {"sequence": doc.get('_id_seq')})
             seq_updated += 1
-    if seq_updated: print(f"  ✓ Sequence updated: {seq_updated}")
+    if seq_updated: print(f"  ✓ Đã cập nhật sequence: {seq_updated}")
 
     print("\n" + "="*60)
     print(f"✅ HOÀN TẤT")
     print(f"   Tổng: {total_files} | Thành công: {success_count} | Thất bại: {total_files - success_count}")
-    print(f"   Space: '{SPACE_NAME}' (ID {space_id})")
+    print(f"   Không gian: '{SPACE_NAME}' (ID {space_id}) {'(Space thật)' if SPACE_FIELD else '(bài gốc)'}")
     print("="*60)
-
 
 # -------------------- MAIN ---------------------------
 if __name__ == "__main__":
     try:
+        parser = argparse.ArgumentParser(description="Import ReadMe export vào Odoo Knowledge (mirror ảnh).")
+        parser.add_argument("--space", help="Tên Space mới (vd: 'Tài liệu Abivin 04')")
+        parser.add_argument("--src", help="Đường dẫn thư mục ReadMe export")
+        parser.add_argument("--url", help="Odoo base URL (vd: https://your.odoo.com)")
+        parser.add_argument("--db", help="Tên database Odoo")
+        parser.add_argument("--user", help="User đăng nhập Odoo")
+        parser.add_argument("--apikey", help="API key Odoo")
+
+        args = parser.parse_args()
+        if args.space: SPACE_NAME = args.space
+        if args.src: README_EXPORT_DIR = args.src
+        if args.url: ODOO_BASE_URL = args.url.rstrip("/")
+        if args.db: ODOO_DB_NAME = args.db
+        if args.user: ODOO_USER = args.user
+        if args.apikey: ODOO_API_KEY = args.apikey
+
         import_all()
     except KeyboardInterrupt:
         print("\n⚠️ Hủy bởi người dùng")
