@@ -26,7 +26,7 @@ ODOO_DB_NAME  = "test018"
 ODOO_USER     = "trinhcongduc0112@gmail.com"
 ODOO_API_KEY  = "3f623d85508792f81af911610db742d67a5d1845"
 
-SPACE_NAME      = "Tài liệu Abivin 04"  # Tên Space (nếu có field space)
+SPACE_NAME      = "docs_abivin"  # Tên Space (nếu có field space)
 ROOT_ARTICLE    = None                  # Tên bài gốc nếu không có field space
 MAX_FIGURE_W    = 960                   # px
 RESPONSIVE_W    = 1200                  # px cho tham số /web/image?width=
@@ -165,50 +165,59 @@ ALL_URL_RE = re.compile(
 
 # ------------- Img attr + zoom -------------
 def _img_add_responsive_attrs(tag_html: str) -> str:
-    # Nếu đã xử lý trước đó thì giữ nguyên
     if re.search(r'\bdata-abivin-img="1"\b', tag_html, flags=re.IGNORECASE):
         return tag_html
 
-    # Xoá width/height/style cũ
+    # xoá width/height/style cũ
     tag_html = _strip_hw_attrs(tag_html)
 
-    # Ép ảnh fit khung
-    style_attrs = 'style="max-width:100%!important;width:100%!important;height:auto!important;display:block!important;object-fit:contain!important;"'
+    # ✅ KHÔNG ép width:100%. Chỉ cho phép co lại trong khung, không phóng to
+    style_attrs = (
+        'style="max-width:100%!important;'
+        'height:auto!important;'
+        'display:inline-block!important;'
+        'object-fit:contain!important;"'
+    )
     if ' style=' not in tag_html:
         tag_html = tag_html.replace('<img', f'<img {style_attrs}', 1)
     else:
         tag_html = re.sub(r'style="[^"]*"', style_attrs, tag_html)
 
-    # Thêm loading="lazy"
     if ' loading=' not in tag_html:
         tag_html = tag_html.replace('<img', '<img loading="lazy"', 1)
 
-    # Thêm sizes
     if not re.search(r'\bsizes=', tag_html, flags=re.IGNORECASE):
-        tag_html = tag_html.replace('<img', f'<img sizes="(max-width: {MAX_FIGURE_W}px) 100vw, {MAX_FIGURE_W}px"', 1)
+        tag_html = tag_html.replace(
+            '<img',
+            f'<img sizes="(max-width: {MAX_FIGURE_W}px) 100vw, {MAX_FIGURE_W}px"',
+            1
+        )
 
-    # Đánh dấu đã xử lý + bật zoom
+    # đánh dấu + bật zoom
     tag_html = tag_html.replace('<img', '<img data-abivin-img="1" data-abivin-zoom="1"', 1)
 
-    # Tạo data-zoom-src từ src (nếu là /web/image)
+    # data-zoom-src chỉ dùng bản lớn (2400px) cho ảnh zoom
     m = re.search(r'\ssrc=["\']([^"\']+)["\']', tag_html, flags=re.IGNORECASE)
     if m:
         src = m.group(1)
         if '/web/image' in src:
             u = urlparse(src); q = dict(parse_qsl(u.query))
-            q['width'] = '2400'  # kích thước zoom
+            q['width'] = '2400'
             zoom_src = urlunparse((u.scheme,u.netloc,u.path,u.params,urlencode(q),u.fragment))
             if 'data-zoom-src' not in tag_html:
                 tag_html = tag_html.replace('<img ', f'<img data-zoom-src="{zoom_src}" ', 1)
     return tag_html
 
+
 def _wrap_figure(img_tag_html: str) -> str:
     return (
         f'<figure style="max-width:{MAX_FIGURE_W}px;'
-        f'margin:12px auto;display:block;text-align:center;box-sizing:border-box;">'
+        f'width:100%;margin:12px auto;display:block;'
+        f'text-align:center;box-sizing:border-box;">'
         f'{_img_add_responsive_attrs(img_tag_html)}'
         f'</figure>'
     )
+
 
 # ------------- HTML Rewrite -------------
 def rewrite_html(models, uid, html: str) -> str:
@@ -218,8 +227,8 @@ def rewrite_html(models, uid, html: str) -> str:
     new_html = html
 
     def add_width_to_web_image(url: str) -> str:
-        if "/web/image" in url:
-            return _add_query_param(url, width=RESPONSIVE_W)
+       # if "/web/image" in url:
+       #     return _add_query_param(url, width=RESPONSIVE_W)
         return url
 
     # 1) Thay src trên <img>
